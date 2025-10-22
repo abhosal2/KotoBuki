@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KotoBuki Japanese Sushi Restaurant</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: url('deecf007-86f4-47ee-b3ce-7f7e6c950663.png') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 90%;
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(8px);
+            border-radius: 20px;
+            padding: 60px 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .restaurant-name {
+            text-align: center;
+            font-size: 4em;
+            font-weight: bold;
+            margin-bottom: 50px;
+            letter-spacing: 3px;
+        }
+
+        .koto {
+            color: #b19cd9;
+        }
+
+        .buki {
+            color: #add8e6;
+        }
+
+        .hours-section {
+            margin-bottom: 50px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 30px;
+            color: #add8e6;
+            font-weight: normal;
+        }
+
+        .hours-grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 15px 30px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .day {
+            font-weight: bold;
+            color: #b19cd9;
+        }
+
+        .time {
+            color: #f0f0f0;
+        }
+
+        .closed {
+            color: #ff6b6b;
+            font-style: italic;
+        }
+
+        .menu-section {
+            text-align: center;
+        }
+
+        .menu-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .menu-link {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #b19cd9 0%, #add8e6 100%);
+            color: #1a1a2e;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(177, 156, 217, 0.3);
+        }
+
+        .menu-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(177, 156, 217, 0.5);
+        }
+
+        @media (max-width: 600px) {
+            .restaurant-name {
+                font-size: 2.5em;
+            }
+
+            .container {
+                padding: 40px 20px;
+            }
+
+            .hours-grid {
+                gap: 10px 20px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="restaurant-name">
+            <span class="koto">Koto</span><span class="buki">Buki</span>
+        </div>
+
+        <div class="hours-section">
+            <h2>Hours</h2>
+            <div class="hours-grid">
+                <span class="day">Monday</span>
+                <span class="time">11:30 AM–2 PM, 5–9:30 PM</span>
+                
+                <span class="day">Tuesday</span>
+                <span class="time">11:30 AM–2 PM, 5–9:30 PM</span>
+                
+                <span class="day">Wednesday</span>
+                <span class="time">11:30 AM–2 PM, 5–9:30 PM</span>
+                
+                <span class="day">Thursday</span>
+                <span class="time">11:30 AM–2 PM, 5–9:30 PM</span>
+                
+                <span class="day">Friday</span>
+                <span class="time">11:30 AM–2 PM, 5–10:30 PM</span>
+                
+                <span class="day">Saturday</span>
+                <span class="time">11:30 AM–2 PM, 5–10:30 PM</span>
+                
+                <span class="day">Sunday</span>
+                <span class="time closed">Closed</span>
+            </div>
+        </div>
+
+        <div class="menu-section">
+            <h2>Menus</h2>
+            <div class="menu-links">
+                <a href="#" class="menu-link">Full Menu</a>
+                <a href="#" class="menu-link">A La Carte Sushi Menu</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
