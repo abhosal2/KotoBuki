@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>KotoBuki Japanese Restaurant</title>
+  <title>KotoBuki Japanese Sushi Restaurant</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -147,4 +147,100 @@
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
     .menu-link:hover {
-      transform: translateY(-4
+      transform: translateY(-4px);
+      box-shadow: 0 6px 25px rgba(164, 91, 38, 0.6);
+    }
+
+    .contact-section {
+      margin-top: 60px;
+      text-align: center;
+      color: #3b2f2f;
+    }
+    .contact-section p {
+      margin: 8px 0;
+      font-size: 1.1em;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 60px;
+      font-size: 0.9em;
+      color: #5c4b3a;
+    }
+    footer a {
+      color: #a45b26;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+    footer a:hover { color: #7b3f00; }
+
+    @media (max-width: 600px) {
+      .restaurant-name { font-size: 2.5em; }
+      nav { flex-direction: column; }
+      .nav-links { margin-top: 10px; }
+      .container { padding: 80px 25px 40px; }
+      .menu-link { padding: 12px 25px; font-size: 1em; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background slideshow -->
+  <div class="slideshow">
+    <img src="Screenshot%202025-10-22%20154733.png" alt="Grilled Fish Dish">
+    <img src="Screenshot%202025-10-22%20154814.png" alt="Sashimi Platter">
+    <img src="Screenshot%202025-10-22%20154917.png" alt="Sushi Boat">
+  </div>
+
+  <header>
+    <nav>
+      <div class="logo">KotoBuki</div>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#menu">Menu</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container" id="home">
+    <div class="restaurant-name">KotoBuki</div>
+    <div class="subtitle">Japanese Sushi Restaurant</div>
+
+    <div class="hours-section">
+      <h2>Hours</h2>
+      <div class="hours-grid">
+        <span class="day">Monday</span><span class="time">11:30 AM–2 PM, 5–9:30 PM</span>
+        <span class="day">Tuesday</span><span class="time">11:30 AM–2 PM, 5–9:30 PM</span>
+        <span class="day">Wednesday</span><span class="time">11:30 AM–2 PM, 5–9:30 PM</span>
+        <span class="day">Thursday</span><span class="time">11:30 AM–2 PM, 5–9:30 PM</span>
+        <span class="day">Friday</span><span class="time">11:30 AM–2 PM, 5–10:30 PM</span>
+        <span class="day">Saturday</span><span class="time">11:30 AM–2 PM, 5–10:30 PM</span>
+        <span class="day">Sunday</span><span class="time closed">Closed</span>
+      </div>
+    </div>
+
+    <div class="menu-section" id="menu">
+      <h2>Menus</h2>
+      <div class="menu-links">
+        <a href="Kotobuki-Menu-September-2022.pdf" class="menu-link" target="_blank">Full Menu (PDF)</a>
+        <a href="Kotobuki-Sushi-Menu-September-2022.pdf" class="menu-link" target="_blank">Sushi Menu (PDF)</a>
+      </div>
+    </div>
+
+    <div class="contact-section" id="contact">
+      <h2>Contact Us</h2>
+      <p><strong>Phone:</strong> (419) 882-8711</p>
+      <p><strong>Address:</strong> 5577 Monroe Street, Sylvania, Ohio 43560</p>
+      <p>
+        <strong>Instagram:</strong>
+        <a href="https://www.instagram.com/kotobukidennis/?hl=en" target="_blank">@kotobukidennis</a>
+      </p>
+    </div>
+
+    <footer>
+      © 2025 KotoBuki Japanese Sushi Restaurant | Designed with elegance and simplicity
+    </footer>
+  </div>
+</body>
+</html>
