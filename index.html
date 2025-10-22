@@ -15,7 +15,7 @@
             font-family: 'Georgia', serif;
             background: url('deecf007-86f4-47ee-b3ce-7f7e6c950663.png') no-repeat center center fixed;
             background-size: cover;
-            color: #fff;
+            color: #2e2e2e;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -23,30 +23,31 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 850px;
             width: 90%;
-            background: rgba(0, 0, 0, 0.55);
-            backdrop-filter: blur(8px);
-            border-radius: 20px;
-            padding: 60px 40px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 60px 50px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.4);
         }
 
         .restaurant-name {
             text-align: center;
-            font-size: 4em;
+            font-size: 3.5em;
             font-weight: bold;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            color: #3b2f2f;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.3em;
+            color: #a45b26;
             margin-bottom: 50px;
-            letter-spacing: 3px;
-        }
-
-        .koto {
-            color: #b19cd9;
-        }
-
-        .buki {
-            color: #add8e6;
+            font-style: italic;
         }
 
         .hours-section {
@@ -56,30 +57,30 @@
         h2 {
             text-align: center;
             font-size: 2em;
-            margin-bottom: 30px;
-            color: #add8e6;
+            margin-bottom: 25px;
+            color: #3b2f2f;
             font-weight: normal;
         }
 
         .hours-grid {
             display: grid;
             grid-template-columns: auto 1fr;
-            gap: 15px 30px;
+            gap: 12px 30px;
             max-width: 600px;
             margin: 0 auto;
         }
 
         .day {
             font-weight: bold;
-            color: #b19cd9;
+            color: #a45b26;
         }
 
         .time {
-            color: #f0f0f0;
+            color: #2e2e2e;
         }
 
         .closed {
-            color: #ff6b6b;
+            color: #c0392b;
             font-style: italic;
         }
 
@@ -89,7 +90,7 @@
 
         .menu-links {
             display: flex;
-            gap: 20px;
+            gap: 25px;
             justify-content: center;
             margin-top: 30px;
             flex-wrap: wrap;
@@ -98,19 +99,26 @@
         .menu-link {
             display: inline-block;
             padding: 15px 40px;
-            background: linear-gradient(135deg, #b19cd9 0%, #add8e6 100%);
-            color: #1a1a2e;
+            background: linear-gradient(135deg, #a45b26 0%, #d9b382 100%);
+            color: #fff;
             text-decoration: none;
             border-radius: 10px;
             font-weight: bold;
             font-size: 1.1em;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 15px rgba(177, 156, 217, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
         .menu-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 25px rgba(177, 156, 217, 0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 6px 25px rgba(164, 91, 38, 0.6);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            font-size: 0.9em;
+            color: #5c4b3a;
         }
 
         @media (max-width: 600px) {
@@ -119,21 +127,25 @@
             }
 
             .container {
-                padding: 40px 20px;
+                padding: 40px 25px;
             }
 
             .hours-grid {
-                gap: 10px 20px;
+                gap: 8px 15px;
                 font-size: 0.9em;
+            }
+
+            .menu-link {
+                padding: 12px 25px;
+                font-size: 1em;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="restaurant-name">
-            <span class="koto">Koto</span><span class="buki">Buki</span>
-        </div>
+        <div class="restaurant-name">KotoBuki</div>
+        <div class="subtitle">Japanese Sushi Restaurant</div>
 
         <div class="hours-section">
             <h2>Hours</h2>
@@ -164,10 +176,14 @@
         <div class="menu-section">
             <h2>Menus</h2>
             <div class="menu-links">
-                <a href="#" class="menu-link">Full Menu</a>
-                <a href="#" class="menu-link">A La Carte Sushi Menu</a>
+                <a href="KotoBuki_Menu.pdf" class="menu-link" target="_blank">Full Menu (PDF)</a>
+                <a href="KotoBuki_AlaCarte.pdf" class="menu-link" target="_blank">A La Carte Menu (PDF)</a>
             </div>
         </div>
+
+        <footer>
+            © 2025 KotoBuki Japanese Sushi Restaurant | Designed with elegance and simplicity
+        </footer>
     </div>
 </body>
 </html>
