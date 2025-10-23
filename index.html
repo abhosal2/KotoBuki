@@ -105,9 +105,13 @@
     <!-- Hero -->
     <div class="hero">
       <div>
-        <div class="logo-chip">
-          <!-- Save the provided logo image as 'kotobuki-logo.png' in the same folder as index.html -->
-          <img src="kotobuki-logo.png" alt="KotoBuki logo" />
+        <div class="logo-chip" aria-label="KotoBuki logo: kanji 寿 inside a ring">
+          <!-- Inline SVG logo: white kanji 寿 (kotobuki) inside a white ring on dark background -->
+          <svg width="64" height="64" viewBox="0 0 100 100" role="img" aria-hidden="true">
+            <circle cx="50" cy="50" r="45" fill="#0a0a0a" stroke="#fff" stroke-width="10" />
+            <text x="50" y="63" text-anchor="middle" font-size="64" fill="#ffffff"
+                  font-family="Noto Sans JP, \"Hiragino Kaku Gothic Pro\", Meiryo, \"MS Gothic\", system-ui, sans-serif">寿</text>
+          </svg>
         </div>
         <h2>KotoBuki – Japanese Restaurant</h2>
         <h1>Fresh • Classic • Hand‑Crafted</h1>
