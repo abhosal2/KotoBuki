@@ -45,7 +45,25 @@
     .menus-section{background:var(--menu-bg);border-top:1px solid rgba(255,255,255,.06);position:relative;}
 
     /* Sushi roll divider */
-    .sushi-roll{width:80px;height:80px;border-radius:50%;background:radial-gradient(circle at center, #f6f0d6 40%, #d13a30 45%, #3a2a28 60%, #000 70%);border:3px solid #fff;margin:0 auto 20px;box-shadow:0 0 10px rgba(0,0,0,0.4)}
+    /* Sushi roll divider – smaller animated maki pieces */
+    .sushi-divider{display:flex;justify-content:center;align-items:center;gap:10px;margin:6px 0 26px}
+    .maki{--s:28px; width:var(--s); height:var(--s); border-radius:50%; position:relative; box-shadow:0 2px 6px rgba(0,0,0,.35);
+      background:
+        radial-gradient(circle at 50% 50%, #f3f0e4 38%, transparent 39%), /* rice */
+        radial-gradient(circle at 50% 50%, #e65245 22%, transparent 23%),  /* tuna/salmon */
+        radial-gradient(circle at 30% 40%, #f7c77b 12%, transparent 13%),  /* tamago */
+        radial-gradient(circle at 70% 60%, #61a05f 10%, transparent 11%),  /* cucumber */
+        radial-gradient(circle at 50% 50%, #1a1a1a 65%, #000 66%);        /* nori */
+      animation: roll-spin 8s linear infinite, roll-bob 3.4s ease-in-out infinite;
+    }
+    .maki:nth-child(2){animation-delay:.2s,.1s}
+    .maki:nth-child(3){animation-delay:.4s,.2s}
+    .maki:nth-child(4){animation-delay:.6s,.3s}
+    .maki:nth-child(5){animation-delay:.8s,.4s}
+    .maki:nth-child(6){animation-delay:1s,.5s}
+
+    @keyframes roll-spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+    @keyframes roll-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
 
     .card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:20px;color:#eef0f3}
     .grid{display:grid;gap:18px}
@@ -102,7 +120,14 @@
 
   <section id="menus" class="menus-section">
     <div class="wrap">
-      <div class="sushi-roll"></div>
+      <div class="sushi-divider" aria-hidden="true">
+        <div class="maki"></div>
+        <div class="maki"></div>
+        <div class="maki"></div>
+        <div class="maki"></div>
+        <div class="maki"></div>
+        <div class="maki"></div>
+      </div>
       <h2>Menus</h2>
       <div class="grid">
         <div class="card">
@@ -126,8 +151,18 @@
         <p><strong>For reservations and to-go orders call:</strong></p>
         <p><a class="btn" href="tel:+14198828711">(419) 882-8711</a></p>
         <p><strong>Instagram:</strong> <a class="btn" href="https://www.instagram.com/kotobukidennis/?hl=en" target="_blank" rel="noopener">@kotobukidennis</a></p>
-        <p style="opacity:.85">Menus and images are hosted in the same folder as this page.</p>
       </div>
+
+      <div class="card" style="margin-top:18px">
+        <h3 style="margin-top:0">Hours</h3>
+        <p style="margin:.25rem 0 .5rem;opacity:.95"><strong>Lunch</strong></p>
+        <p style="margin:.15rem 0">Mon – Sat: 11:30 AM – 2:00 PM</p>
+        <p style="margin:.9rem 0 .5rem;opacity:.95"><strong>Dinner</strong></p>
+        <p style="margin:.15rem 0">Mon – Thu: 5:00 PM – 9:30 PM</p>
+        <p style="margin:.15rem 0">Fri – Sat: 5:00 PM – 10:30 PM</p>
+        <p style="margin:1rem 0 0;opacity:.9"><strong>Sunday:</strong> Closed</p>
+      </div>
+
     </div>
   </section>
 
