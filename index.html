@@ -1,242 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KotoBuki Japanese Sushi Restaurant</title>
-<style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kotobuki • Japanese Sushi Restaurant</title>
+  <style>
+    :root{
+      --slide-count: 7;               /* UPDATE if you add/remove screenshots */
+      --slide-duration: 7s;           /* time each image stays visible */
+      --fade-duration: 1.2s;          /* crossfade speed */
+      --overlay-opacity: 0.28;        /* lower value = images more visible */
+      --content-max: 960px;
+      --brand: #0F2447;               /* deep navy */
+      --accent: #8384D4;              /* soft lavender */
+    }
 
-body {
-  font-family: 'Georgia', serif;
-  color: #2f2f2f;
-  overflow-x: hidden;
-}
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#fff;}
 
-/* ===== SLIDESHOW ===== */
-.slideshow {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  z-index: -1;
-  overflow: hidden;
-}
+    /* Full-bleed stage */
+    .stage{position:relative;min-height:100dvh;overflow:hidden;background:#000;}
 
-.slideshow img {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  animation: slideShow 18s infinite;
-}
+    /* Background slideshow container */
+    .bg{position:absolute;inset:0;z-index:-2;}
+    .bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;filter:
+        brightness(1.05) contrast(1.05) saturate(1.12); /* make images pop a bit */
+      animation: fade var(--slide-duration) linear infinite;
+    }
+    /* Stagger each image by animation delay; we generate these in the HTML below */
 
-.slideshow img:nth-child(1) { animation-delay: 0s; transform: translateX(-100%); }
-.slideshow img:nth-child(2) { animation-delay: 6s; transform: translateX(100%); }
-.slideshow img:nth-child(3) { animation-delay: 12s; transform: translateX(-100%); }
+    /* Soft gradient/overlay so text remains readable without hiding photos */
+    .overlay{position:absolute;inset:0;z-index:-1;pointer-events:none;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,calc(var(--overlay-opacity)*1.1)) 0%, rgba(0,0,0,var(--overlay-opacity)) 40%, rgba(0,0,0,calc(var(--overlay-opacity)*0.8)) 100%);
+      backdrop-filter: blur(1px);
+    }
 
-@keyframes slideShow {
-  0%   { opacity: 0; transform: translateX(0); }
-  10%  { opacity: 1; transform: translateX(0); }
-  30%  { opacity: 1; }
-  40%  { opacity: 0; transform: translateX(0); }
-  100% { opacity: 0; }
-}
+    header{position:sticky;top:0;backdrop-filter:saturate(1.2) blur(6px);background:rgba(0,0,0,0.25);border-bottom:1px solid rgba(255,255,255,0.12);}
+    .nav{max-width:var(--content-max);margin:auto;display:flex;align-items:center;gap:16px;padding:14px 18px;}
+    .brand{font-weight:700;letter-spacing:.4px}
+    .brand .jp{font-size:.9em;opacity:.9;}
+    .spacer{flex:1}
+    .nav a{color:#fff;text-decoration:none;padding:.45rem .8rem;border-radius:999px;border:1px solid rgba(255,255,255,.18)}
+    .nav a:hover{background:rgba(255,255,255,.1)}
 
-/* ===== NAVBAR ===== */
-header {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(8px);
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 10;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-}
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 15px 30px;
-}
-.logo {
-  font-size: 1.8em;
-  font-weight: bold;
-  color: #3b2f2f;
-  letter-spacing: 2px;
-}
-.nav-links a {
-  margin-left: 25px;
-  text-decoration: none;
-  color: #a45b26;
-  font-weight: bold;
-  transition: color 0.3s ease;
-}
-.nav-links a:hover { color: #7b3f00; }
+    .hero{display:grid;place-items:center;min-height:80dvh;padding:24px;text-align:center}
+    .hero h1{margin:0;font-size:clamp(28px,5vw,54px);font-weight:800;text-shadow:0 8px 24px rgba(0,0,0,.45)}
+    .hero p{max-width:720px;margin:14px auto 0;font-size:clamp(15px,2.4vw,18px);opacity:.95}
+    .cta{margin-top:22px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .btn{display:inline-block;padding:.9rem 1.2rem;border-radius:14px;border:1px solid rgba(255,255,255,.25);text-decoration:none;color:#fff}
+    .btn.primary{background:linear-gradient(135deg,var(--accent),#a2a3f3)}
+    .btn:hover{transform:translateY(-1px)}
 
-/* ===== CONTENT BOX ===== */
-.container {
-  max-width: 850px;
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(8px);
-  border-radius: 15px;
-  padding: 120px 50px 60px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-  margin: 120px auto 60px;
-}
+    section{scroll-margin-top:72px}
+    .wrap{max-width:var(--content-max);margin:auto;padding:42px 18px}
 
-.restaurant-name {
-  text-align: center;
-  font-size: 3.5em;
-  font-weight: bold;
-  margin-bottom: 10px;
-  letter-spacing: 2px;
-  color: #3b2f2f;
-}
-.subtitle {
-  text-align: center;
-  font-size: 1.3em;
-  color: #a45b26;
-  margin-bottom: 50px;
-  font-style: italic;
-}
+    .card{background:rgba(15,36,71,.35);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:20px}
+    .grid{display:grid;gap:18px}
+    @media(min-width:720px){.grid{grid-template-columns:1fr 1fr}}
 
-h2 {
-  text-align: center;
-  font-size: 2em;
-  margin-bottom: 25px;
-  color: #3b2f2f;
-  font-weight: normal;
-}
+    footer{padding:30px 18px;text-align:center;opacity:.85}
 
-/* HOURS GRID */
-.hours-grid {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 12px 30px;
-  max-width: 600px;
-  margin: 0 auto 50px;
-}
-.day { font-weight: bold; color: #a45b26; }
-.time { color: #2e2e2e; }
-.closed { color: #c0392b; font-style: italic; }
-
-/* MENUS */
-.menu-section { text-align: center; }
-.menu-links {
-  display: flex;
-  gap: 25px;
-  justify-content: center;
-  margin-top: 30px;
-  flex-wrap: wrap;
-}
-.menu-link {
-  display: inline-block;
-  padding: 15px 40px;
-  background: linear-gradient(135deg, #a45b26 0%, #d9b382 100%);
-  color: #fff;
-  text-decoration: none;
-  border-radius: 10px;
-  font-weight: bold;
-  font-size: 1.1em;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-.menu-link:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 25px rgba(164, 91, 38, 0.6);
-}
-
-/* CONTACT */
-.contact-section {
-  margin-top: 60px;
-  text-align: center;
-  color: #3b2f2f;
-}
-.contact-section p { margin: 8px 0; font-size: 1.1em; }
-
-footer {
-  text-align: center;
-  margin-top: 60px;
-  font-size: 0.9em;
-  color: #5c4b3a;
-}
-footer a {
-  color: #a45b26;
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s ease;
-}
-footer a:hover { color: #7b3f00; }
-
-@media (max-width: 600px) {
-  .restaurant-name { font-size: 2.5em; }
-  nav { flex-direction: column; }
-  .nav-links { margin-top: 10px; }
-  .container { padding: 80px 25px 40px; }
-  .menu-link { padding: 12px 25px; font-size: 1em; }
-}
-</style>
+    /* Fading keyframes: 0% transparent -> 100% transparent with a bright middle */
+    @keyframes fade {
+      0%, 10% { opacity: 0 }
+      15%, 85% { opacity: 1 }
+      90%, 100% { opacity: 0 }
+    }
+  </style>
 </head>
 <body>
-<!-- Background slideshow -->
-<div class="slideshow">
-  <img src="Screenshot%202025-10-22%20154733.png" alt="Dish 1">
-  <img src="Screenshot%202025-10-22%20154814.png" alt="Dish 2">
-  <img src="Screenshot%202025-10-22%20154917.png" alt="Dish 3">
-</div>
-
-<header>
-  <nav>
-    <div class="logo">KotoBuki</div>
-    <div class="nav-links">
-      <a href="#home">Home</a>
-      <a href="#menu">Menu</a>
-      <a href="#contact">Contact</a>
+  <div class="stage" id="top">
+    <!-- Background Slideshow -->
+    <div class="bg" aria-hidden="true">
+      <!-- NOTE: Files must exist in the same folder as index.html -->
+      <!-- Earlier screenshots -->
+      <img src="Screenshot 2025-10-22 154733.png" style="animation-delay: calc(0 * var(--slide-duration));" alt="Background 1" />
+      <img src="Screenshot 2025-10-22 154814.png" style="animation-delay: calc(1 * var(--slide-duration));" alt="Background 2" />
+      <img src="Screenshot 2025-10-22 154917.png" style="animation-delay: calc(2 * var(--slide-duration));" alt="Background 3" />
+      <!-- Newer screenshots you added -->
+      <img src="Screenshot 2025-10-22 161310.png" style="animation-delay: calc(3 * var(--slide-duration));" alt="Background 4" />
+      <img src="Screenshot 2025-10-22 161344.png" style="animation-delay: calc(4 * var(--slide-duration));" alt="Background 5" />
+      <img src="Screenshot 2025-10-22 161407.png" style="animation-delay: calc(5 * var(--slide-duration));" alt="Background 6" />
+      <img src="Screenshot 2025-10-23 112115.png" style="animation-delay: calc(6 * var(--slide-duration));" alt="Background 7" />
     </div>
-  </nav>
-</header>
+    <div class="overlay"></div>
 
-<div class="container" id="home">
-  <div class="restaurant-name">KotoBuki</div>
-  <div class="subtitle">Japanese Sushi Restaurant</div>
+    <!-- Navigation -->
+    <header>
+      <nav class="nav">
+        <div class="brand">Kotobuki <span class="jp">• Japanese Sushi Restaurant</span></div>
+        <div class="spacer"></div>
+        <a href="#menus" title="View Menus">Menus</a>
+        <a href="#contact" title="Contact & Location">Contact</a>
+        <a href="https://www.instagram.com/kotobukidennis/?hl=en" rel="noopener" target="_blank" title="Instagram">Instagram</a>
+      </nav>
+    </header>
 
-  <div class="hours-section">
-    <h2>Hours</h2>
-    <div class="hours-grid">
-      <span class="day">Monday</span><span class="time">11:30 AM–2 PM, 5–9:30 PM</span>
-      <span class="day">Tuesday</span><span class="time">11:30 AM–2 PM, 5–9:30 PM</span>
-      <span class="day">Wednesday</span><span class="time">11:30 AM–2 PM, 5–9:30 PM</span>
-      <span class="day">Thursday</span><span class="time">11:30 AM–2 PM, 5–9:30 PM</span>
-      <span class="day">Friday</span><span class="time">11:30 AM–2 PM, 5–10:30 PM</span>
-      <span class="day">Saturday</span><span class="time">11:30 AM–2 PM, 5–10:30 PM</span>
-      <span class="day">Sunday</span><span class="time closed">Closed</span>
-    </div>
-  </div>
-
-  <div class="menu-section" id="menu">
-    <h2>Menus</h2>
-    <div class="menu-links">
-      <a href="Kotobuki-Menu-September-2022.pdf" class="menu-link" target="_blank">Full Menu (PDF)</a>
-      <a href="Kotobuki-Sushi-Menu-September-2022.pdf" class="menu-link" target="_blank">Sushi Menu (PDF)</a>
+    <!-- Hero -->
+    <div class="hero">
+      <div>
+        <h1>Fresh • Classic • Hand‑Crafted</h1>
+        <p>Welcome to Kotobuki. Enjoy traditional sushi, sashimi, and Japanese favorites prepared with care. Scroll to see our latest menus and contact info.</p>
+        <div class="cta">
+          <a class="btn primary" href="#menus">View Menus</a>
+          <a class="btn" href="#contact">Call (419) 882‑8711</a>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="contact-section" id="contact">
-    <h2>Contact Us</h2>
-    <p><strong>Phone:</strong> (419) 882-8711</p>
-    <p><strong>Address:</strong> 5577 Monroe Street, Sylvania, Ohio 43560</p>
-    <p><strong>Instagram:</strong>
-      <a href="https://www.instagram.com/kotobukidennis/?hl=en" target="_blank">@kotobukidennis</a>
-    </p>
-  </div>
+  <!-- Menus -->
+  <section id="menus">
+    <div class="wrap">
+      <h2>Menus</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Full Menu (PDF)</h3>
+          <p>Opens a PDF in a new tab.</p>
+          <p><a class="btn" href="Kotobuki-Menu-September-2022.pdf" target="_blank" rel="noopener">Open • Kotobuki‑Menu‑September‑2022.pdf</a></p>
+        </div>
+        <div class="card">
+          <h3>Sushi Menu (PDF)</h3>
+          <p>Opens a PDF in a new tab.</p>
+          <p><a class="btn" href="Kotobuki-Sushi-Menu-September-2022.pdf" target="_blank" rel="noopener">Open • Kotobuki‑Sushi‑Menu‑September‑2022.pdf</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="wrap">
+      <h2>Contact</h2>
+      <div class="card">
+        <p><strong>Phone:</strong> <a class="btn" href="tel:+14198828711">(419) 882‑8711</a></p>
+        <p><strong>Instagram:</strong> <a class="btn" href="https://www.instagram.com/kotobukidennis/?hl=en" target="_blank" rel="noopener">@kotobukidennis</a></p>
+        <p style="opacity:.85">Menus and images are hosted in the same folder as this page.</p>
+      </div>
+    </div>
+  </section>
 
   <footer>
-    © 2025 KotoBuki Japanese Sushi Restaurant | Designed with elegance and simplicity
+    <small>© Kotobuki. Website draft for demonstration.</small>
   </footer>
-</div>
+
+  <script>
+    /* OPTIONAL: If you add/remove images, update --slide-count and add/remove <img> tags above.
+       The script below automatically stretches the total animation timeline
+       so that the sequence loops smoothly across all images. */
+    (function(){
+      const root = document.documentElement;
+      const imgs = document.querySelectorAll('.bg img');
+      const n = imgs.length;
+      root.style.setProperty('--slide-count', n);
+
+      // Build a long animation timeline: total = n * duration
+      const dur = getComputedStyle(root).getPropertyValue('--slide-duration').trim();
+      imgs.forEach((img, i) => img.style.animationDelay = `calc(${i} * ${dur})`);
+    })();
+  </script>
 </body>
 </html>
