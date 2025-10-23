@@ -6,33 +6,22 @@
   <title>KotoBuki – Japanese Restaurant</title>
   <style>
     :root{
-      --slide-duration: 7s;           /* time each image stays visible */
-      --fade-duration: 1.2s;          /* crossfade speed */
-      --overlay-opacity: 0.22;        /* lower value = images more visible */
+      --slide-duration: 7s;
+      --overlay-opacity: 0.22;
       --content-max: 960px;
-      --brand: #0F2447;               /* deep navy */
-      --accent: #8384D4;              /* soft lavender */
+      --brand: #0F2447;
+      --accent: #8384D4;
+      --menu-bg: #1b1f2b; /* soft dark indigo */
     }
 
     *{box-sizing:border-box}
     html,body{height:100%;margin:0;font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#f3f4f6;background:#0a0a0a}
 
-    /* Full-bleed stage */
     .stage{position:relative;min-height:100dvh;overflow:hidden;background:#000;}
-
-    /* Background slideshow container */
     .bg{position:absolute;inset:0;z-index:-2;}
-    .bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;filter:
-        brightness(1.08) contrast(1.06) saturate(1.12); /* make images pop a bit */
-      animation: fade var(--slide-duration) linear infinite;
-    }
+    .bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;filter:brightness(1.08) contrast(1.06) saturate(1.12);animation:fade var(--slide-duration) linear infinite;}
 
-    /* Soft gradient/overlay so text remains readable without hiding photos */
-    .overlay{position:absolute;inset:0;z-index:-1;pointer-events:none;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,calc(var(--overlay-opacity)*1.15)) 0%, rgba(0,0,0,var(--overlay-opacity)) 40%, rgba(0,0,0,calc(var(--overlay-opacity)*0.8)) 100%);
-      backdrop-filter: blur(1px);
-    }
+    .overlay{position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,0.4),rgba(0,0,0,0.7));backdrop-filter:blur(1px);}
 
     header{position:sticky;top:0;backdrop-filter:saturate(1.2) blur(6px);background:rgba(0,0,0,0.35);border-bottom:1px solid rgba(255,255,255,0.12);}
     .nav{max-width:var(--content-max);margin:auto;display:flex;align-items:center;gap:16px;padding:14px 18px;}
@@ -44,43 +33,34 @@
 
     .hero{display:grid;place-items:center;min-height:80dvh;padding:24px;text-align:center}
     .hero h1{margin:8px 0 0;font-size:clamp(28px,5vw,54px);font-weight:800;text-shadow:0 8px 24px rgba(0,0,0,.45)}
-    .hero h2{margin:0; font-size:clamp(18px,3vw,26px); font-weight:700; opacity:.95}
+    .hero h2{margin:0;font-size:clamp(18px,3vw,26px);font-weight:700;opacity:.95}
     .hero p{max-width:720px;margin:14px auto 0;font-size:clamp(15px,2.4vw,18px);opacity:.96}
     .cta{margin-top:22px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
     .btn{display:inline-block;padding:.9rem 1.2rem;border-radius:14px;border:1px solid rgba(255,255,255,.25);text-decoration:none;color:#fff}
     .btn.primary{background:linear-gradient(135deg,var(--accent),#a2a3f3)}
-    .btn:hover{transform:translateY(-1px)}
 
     section{scroll-margin-top:72px}
     .wrap{max-width:var(--content-max);margin:auto;padding:42px 18px}
 
-    /* DARKER interior sections so they aren't bright white */
-    .section{background:linear-gradient(180deg, rgba(0,0,0,.78), rgba(0,0,0,.86));border-top:1px solid rgba(255,255,255,.06);}
+    .menus-section{background:var(--menu-bg);border-top:1px solid rgba(255,255,255,.06);position:relative;}
 
-    .card{background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:20px;color:#eef0f3}
+    /* Sushi roll divider */
+    .sushi-roll{width:80px;height:80px;border-radius:50%;background:radial-gradient(circle at center, #f6f0d6 40%, #d13a30 45%, #3a2a28 60%, #000 70%);border:3px solid #fff;margin:0 auto 20px;box-shadow:0 0 10px rgba(0,0,0,0.4)}
+
+    .card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:20px;color:#eef0f3}
     .grid{display:grid;gap:18px}
     @media(min-width:720px){.grid{grid-template-columns:1fr 1fr}}
 
     footer{padding:30px 18px;text-align:center;opacity:.85}
 
-    /* Fading keyframes: 0% transparent -> 100% transparent with a bright middle */
-    @keyframes fade {
-      0%, 10% { opacity: 0 }
-      15%, 85% { opacity: 1 }
-      90%, 100% { opacity: 0 }
-    }
+    @keyframes fade {0%,10%{opacity:0}15%,85%{opacity:1}90%,100%{opacity:0}}
 
-    /* Logo chip */
-    .logo-chip{width:64px;height:64px;border-radius:999px;display:inline-grid;place-items:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);margin:0 auto 10px}
-    .logo-chip img{width:42px;height:42px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.45))}
+    .logo-chip{width:64px;height:64px;margin:0 auto 10px}
   </style>
 </head>
 <body>
   <div class="stage" id="top">
-    <!-- Background Slideshow -->
     <div class="bg" aria-hidden="true">
-      <!-- NOTE: Files must exist in the same folder as index.html
-           Encoded spaces (%20) ensure GitHub Pages loads them correctly. -->
       <img src="Screenshot%202025-10-22%20154733.png" style="animation-delay: calc(0 * var(--slide-duration));" alt="Background 1" />
       <img src="Screenshot%202025-10-22%20154814.png" style="animation-delay: calc(1 * var(--slide-duration));" alt="Background 2" />
       <img src="Screenshot%202025-10-22%20154917.png" style="animation-delay: calc(2 * var(--slide-duration));" alt="Background 3" />
@@ -91,7 +71,6 @@
     </div>
     <div class="overlay"></div>
 
-    <!-- Navigation -->
     <header>
       <nav class="nav">
         <div class="brand">KotoBuki <span class="jp">– Japanese Restaurant</span></div>
@@ -102,53 +81,50 @@
       </nav>
     </header>
 
-    <!-- Hero -->
     <div class="hero">
       <div>
         <div class="logo-chip" aria-label="KotoBuki logo: kanji 寿 inside a ring">
-          <!-- Inline SVG logo: white kanji 寿 (kotobuki) inside a white ring on dark background -->
           <svg width="64" height="64" viewBox="0 0 100 100" role="img" aria-hidden="true">
             <circle cx="50" cy="50" r="45" fill="#0a0a0a" stroke="#fff" stroke-width="10" />
-            <text x="50" y="63" text-anchor="middle" font-size="64" fill="#ffffff"
-                  font-family="Noto Sans JP, \"Hiragino Kaku Gothic Pro\", Meiryo, \"MS Gothic\", system-ui, sans-serif">寿</text>
+            <text x="50" y="63" text-anchor="middle" font-size="64" fill="#ffffff" font-family="Noto Sans JP, sans-serif">寿</text>
           </svg>
         </div>
         <h2>KotoBuki – Japanese Restaurant</h2>
-        <h1>Fresh • Classic • Hand‑Crafted</h1>
+        <h1>Fresh • Classic • Hand-Crafted</h1>
         <p>Welcome to KotoBuki. Enjoy traditional sushi, sashimi, and Japanese favorites prepared with care. Scroll to see our latest menus and contact info.</p>
         <div class="cta">
           <a class="btn primary" href="#menus">View Menus</a>
-          <a class="btn" href="#contact">Call (419) 882‑8711</a>
+          <a class="btn" href="#contact">Call (419) 882-8711</a>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Menus -->
-  <section id="menus" class="section">
+  <section id="menus" class="menus-section">
     <div class="wrap">
+      <div class="sushi-roll"></div>
       <h2>Menus</h2>
       <div class="grid">
         <div class="card">
           <h3>Full Menu (PDF)</h3>
           <p>Opens a PDF in a new tab.</p>
-          <p><a class="btn" href="Kotobuki-Menu-September-2022.pdf" target="_blank" rel="noopener">Open • Kotobuki‑Menu‑September‑2022.pdf</a></p>
+          <p><a class="btn" href="Kotobuki-Menu-September-2022.pdf" target="_blank" rel="noopener">Open • Kotobuki-Menu-September-2022.pdf</a></p>
         </div>
         <div class="card">
           <h3>Sushi Menu (PDF)</h3>
           <p>Opens a PDF in a new tab.</p>
-          <p><a class="btn" href="Kotobuki-Sushi-Menu-September-2022.pdf" target="_blank" rel="noopener">Open • Kotobuki‑Sushi‑Menu‑September‑2022.pdf</a></p>
+          <p><a class="btn" href="Kotobuki-Sushi-Menu-September-2022.pdf" target="_blank" rel="noopener">Open • Kotobuki-Sushi-Menu-September-2022.pdf</a></p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact -->
-  <section id="contact" class="section">
+  <section id="contact" style="background:#111318;border-top:1px solid rgba(255,255,255,.06);">
     <div class="wrap">
       <h2>Contact</h2>
       <div class="card">
-        <p><strong>Phone:</strong> <a class="btn" href="tel:+14198828711">(419) 882‑8711</a></p>
+        <p><strong>For reservations and to-go orders call:</strong></p>
+        <p><a class="btn" href="tel:+14198828711">(419) 882-8711</a></p>
         <p><strong>Instagram:</strong> <a class="btn" href="https://www.instagram.com/kotobukidennis/?hl=en" target="_blank" rel="noopener">@kotobukidennis</a></p>
         <p style="opacity:.85">Menus and images are hosted in the same folder as this page.</p>
       </div>
@@ -158,15 +134,5 @@
   <footer>
     <small>© KotoBuki. Website draft for demonstration.</small>
   </footer>
-
-  <script>
-    /* Ensure the fade loop lines up across all images */
-    (function(){
-      const root = document.documentElement;
-      const imgs = document.querySelectorAll('.bg img');
-      const dur = getComputedStyle(root).getPropertyValue('--slide-duration').trim();
-      imgs.forEach((img, i) => img.style.animationDelay = `calc(${i} * ${dur})`);
-    })();
-  </script>
 </body>
 </html>
