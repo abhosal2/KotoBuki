@@ -11,7 +11,7 @@
       --content-max: 960px;
       --brand: #0F2447;
       --accent: #8384D4;
-      --menu-bg: #1b1f2b; /* soft dark indigo */
+      --menu-bg: #1b1f2b;
     }
 
     *{box-sizing:border-box}
@@ -23,12 +23,12 @@
 
     .overlay{position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,0.4),rgba(0,0,0,0.7));backdrop-filter:blur(1px);}
 
-    header{position:sticky;top:0;backdrop-filter:saturate(1.2) blur(6px);background:rgba(0,0,0,0.35);border-bottom:1px solid rgba(255,255,255,0.12);}
+    header{position:sticky;top:0;backdrop-filter:saturate(1.2) blur(6px);background:rgba(0,0,0,0.35);border-bottom:1px solid rgba(255,255,255,0.12);z-index:10;}
     .nav{max-width:var(--content-max);margin:auto;display:flex;align-items:center;gap:16px;padding:14px 18px;}
     .brand{font-weight:800;letter-spacing:.4px}
     .brand .jp{font-size:.92em;opacity:.95;}
     .spacer{flex:1}
-    .nav a{color:#fff;text-decoration:none;padding:.45rem .8rem;border-radius:999px;border:1px solid rgba(255,255,255,.18)}
+    .nav a{color:#fff;text-decoration:none;padding:.45rem .8rem;border-radius:999px;border:1px solid rgba(255,255,255,.18);transition:background .2s}
     .nav a:hover{background:rgba(255,255,255,.08)}
 
     .hero{display:grid;place-items:center;min-height:80dvh;padding:24px;text-align:center}
@@ -44,24 +44,19 @@
 
     .menus-section{background:var(--menu-bg);border-top:1px solid rgba(255,255,255,.06);position:relative;}
 
-    /* Sushi roll divider */
-    /* Sushi roll divider – smaller animated maki pieces */
     .sushi-divider{display:flex;justify-content:center;align-items:center;gap:10px;margin:6px 0 26px}
-    .maki{--s:28px; width:var(--s); height:var(--s); border-radius:50%; position:relative; box-shadow:0 2px 6px rgba(0,0,0,.35);
-      background:
-        radial-gradient(circle at 50% 50%, #f3f0e4 38%, transparent 39%), /* rice */
-        radial-gradient(circle at 50% 50%, #e65245 22%, transparent 23%),  /* tuna/salmon */
-        radial-gradient(circle at 30% 40%, #f7c77b 12%, transparent 13%),  /* tamago */
-        radial-gradient(circle at 70% 60%, #61a05f 10%, transparent 11%),  /* cucumber */
-        radial-gradient(circle at 50% 50%, #1a1a1a 65%, #000 66%);        /* nori */
-      animation: roll-spin 8s linear infinite, roll-bob 3.4s ease-in-out infinite;
-    }
+    .maki{--s:28px;width:var(--s);height:var(--s);border-radius:50%;position:relative;box-shadow:0 2px 6px rgba(0,0,0,.35);background:
+      radial-gradient(circle at 50% 50%,#f3f0e4 38%,transparent 39%),
+      radial-gradient(circle at 50% 50%,#e65245 22%,transparent 23%),
+      radial-gradient(circle at 30% 40%,#f7c77b 12%,transparent 13%),
+      radial-gradient(circle at 70% 60%,#61a05f 10%,transparent 11%),
+      radial-gradient(circle at 50% 50%,#1a1a1a 65%,#000 66%);
+      animation: roll-spin 8s linear infinite, roll-bob 3.4s ease-in-out infinite;}
     .maki:nth-child(2){animation-delay:.2s,.1s}
     .maki:nth-child(3){animation-delay:.4s,.2s}
     .maki:nth-child(4){animation-delay:.6s,.3s}
     .maki:nth-child(5){animation-delay:.8s,.4s}
     .maki:nth-child(6){animation-delay:1s,.5s}
-
     @keyframes roll-spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
     @keyframes roll-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
 
@@ -71,7 +66,7 @@
 
     footer{padding:30px 18px;text-align:center;opacity:.85}
 
-    @keyframes fade {0%,10%{opacity:0}15%,85%{opacity:1}90%,100%{opacity:0}}
+    @keyframes fade{0%,10%{opacity:0}15%,85%{opacity:1}90%,100%{opacity:0}}
 
     .logo-chip{width:64px;height:64px;margin:0 auto 10px}
   </style>
@@ -79,13 +74,14 @@
 <body>
   <div class="stage" id="top">
     <div class="bg" aria-hidden="true">
-      <img src="Screenshot%202025-10-22%20154733.png" style="animation-delay: calc(0 * var(--slide-duration));" alt="Background 1" />
-      <img src="Screenshot%202025-10-22%20154814.png" style="animation-delay: calc(1 * var(--slide-duration));" alt="Background 2" />
-      <img src="Screenshot%202025-10-22%20154917.png" style="animation-delay: calc(2 * var(--slide-duration));" alt="Background 3" />
-      <img src="Screenshot%202025-10-22%20161310.png" style="animation-delay: calc(3 * var(--slide-duration));" alt="Background 4" />
-      <img src="Screenshot%202025-10-22%20161344.png" style="animation-delay: calc(4 * var(--slide-duration));" alt="Background 5" />
-      <img src="Screenshot%202025-10-22%20161407.png" style="animation-delay: calc(5 * var(--slide-duration));" alt="Background 6" />
-      <img src="Screenshot%202025-10-23%20112115.png" style="animation-delay: calc(6 * var(--slide-duration));" alt="Background 7" />
+      <!-- If any of these files don't exist, they will auto-remove on error. -->
+      <img src="Screenshot%202025-10-22%20154733.png" onerror="this.remove()" style="animation-delay: calc(0 * var(--slide-duration));" alt="Background 1" />
+      <img src="Screenshot%202025-10-22%20154814.png" onerror="this.remove()" style="animation-delay: calc(1 * var(--slide-duration));" alt="Background 2" />
+      <img src="Screenshot%202025-10-22%20154917.png" onerror="this.remove()" style="animation-delay: calc(2 * var(--slide-duration));" alt="Background 3" />
+      <img src="Screenshot%202025-10-22%20161310.png" onerror="this.remove()" style="animation-delay: calc(3 * var(--slide-duration));" alt="Background 4" />
+      <img src="Screenshot%202025-10-22%20161344.png" onerror="this.remove()" style="animation-delay: calc(4 * var(--slide-duration));" alt="Background 5" />
+      <img src="Screenshot%202025-10-22%20161407.png" onerror="this.remove()" style="animation-delay: calc(5 * var(--slide-duration));" alt="Background 6" />
+      <img src="Screenshot%202025-10-23%20112115.png" onerror="this.remove()" style="animation-delay: calc(6 * var(--slide-duration));" alt="Background 7" />
     </div>
     <div class="overlay"></div>
 
@@ -95,6 +91,7 @@
         <div class="spacer"></div>
         <a href="#menus" title="View Menus">Menus</a>
         <a href="#contact" title="Contact & Location">Contact</a>
+        <a href="#hours" title="Hours">Hours</a>
         <a href="https://www.instagram.com/kotobukidennis/?hl=en" rel="noopener" target="_blank" title="Instagram">Instagram</a>
       </nav>
     </header>
@@ -144,6 +141,20 @@
     </div>
   </section>
 
+  <section id="hours" style="background:#111318;border-top:1px solid rgba(255,255,255,.06);">
+    <div class="wrap">
+      <h2>Hours</h2>
+      <div class="card">
+        <p style="margin:.25rem 0 .5rem;opacity:.95"><strong>Lunch</strong></p>
+        <p style="margin:.15rem 0">Mon – Sat: 11:30 AM – 2:00 PM</p>
+        <p style="margin:.9rem 0 .5rem;opacity:.95"><strong>Dinner</strong></p>
+        <p style="margin:.15rem 0">Mon – Thu: 5:00 PM – 9:30 PM</p>
+        <p style="margin:.15rem 0">Fri – Sat: 5:00 PM – 10:30 PM</p>
+        <p style="margin:1rem 0 0;opacity:.9"><strong>Sunday:</strong> Closed</p>
+      </div>
+    </div>
+  </section>
+
   <section id="contact" style="background:#111318;border-top:1px solid rgba(255,255,255,.06);">
     <div class="wrap">
       <h2>Contact</h2>
@@ -152,17 +163,6 @@
         <p><a class="btn" href="tel:+14198828711">(419) 882-8711</a></p>
         <p><strong>Instagram:</strong> <a class="btn" href="https://www.instagram.com/kotobukidennis/?hl=en" target="_blank" rel="noopener">@kotobukidennis</a></p>
       </div>
-
-      <div class="card" style="margin-top:18px">
-        <h3 style="margin-top:0">Hours</h3>
-        <p style="margin:.25rem 0 .5rem;opacity:.95"><strong>Lunch</strong></p>
-        <p style="margin:.15rem 0">Mon – Sat: 11:30 AM – 2:00 PM</p>
-        <p style="margin:.9rem 0 .5rem;opacity:.95"><strong>Dinner</strong></p>
-        <p style="margin:.15rem 0">Mon – Thu: 5:00 PM – 9:30 PM</p>
-        <p style="margin:.15rem 0">Fri – Sat: 5:00 PM – 10:30 PM</p>
-        <p style="margin:1rem 0 0;opacity:.9"><strong>Sunday:</strong> Closed</p>
-      </div>
-
     </div>
   </section>
 
