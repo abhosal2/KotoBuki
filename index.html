@@ -46,6 +46,11 @@
     .wrap{max-width:var(--content-max);margin:auto;padding:42px 18px}
 
     .menus-section{background:var(--menu-bg);border-top:1px solid rgba(255,255,255,.06);position:relative;}
+    /* Center the Menus section and prevent left-corner crowding */
+    .menus-section .wrap{display:grid;justify-items:center;align-content:start;}
+    .menus-section h2{width:100%;text-align:center;margin:12px 0 18px}
+    .menus-section .grid{width:100%;max-width:var(--content-max);margin:0 auto;display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));}
+    .menus-section .card{height:100%;}
 
     .sushi-divider{display:flex;justify-content:center;align-items:center;gap:12px;margin:10px 0 30px}
     /* Rainbow roll pieces (compact) */
