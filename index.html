@@ -18,10 +18,10 @@
     html,body{height:100%;margin:0;font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#f3f4f6;background:#0a0a0a}
 
     .stage{position:relative;min-height:100dvh;overflow:hidden;background:#000;}
-    .bg{position:absolute;inset:0;z-index:-2;}
+    .bg{position:absolute;inset:0;z-index:0;}
     .bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;filter:brightness(1.08) contrast(1.06) saturate(1.12);animation:fade var(--slide-duration) linear infinite;}
 
-    .overlay{position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,0.4),rgba(0,0,0,0.7));backdrop-filter:blur(1px);}
+    .overlay{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,0.4),rgba(0,0,0,0.7));backdrop-filter:blur(1px);}
 
     header{position:sticky;top:0;backdrop-filter:saturate(1.2) blur(6px);background:rgba(0,0,0,0.35);border-bottom:1px solid rgba(255,255,255,0.12);z-index:10;}
     .nav{max-width:var(--content-max);margin:auto;display:flex;align-items:center;gap:16px;padding:14px 18px;}
@@ -74,14 +74,14 @@
 <body>
   <div class="stage" id="top">
     <div class="bg" aria-hidden="true">
-      <!-- If any of these files don't exist, they will auto-remove on error. -->
-      <img src="Screenshot%202025-10-22%20154733.png" onerror="this.remove()" style="animation-delay: calc(0 * var(--slide-duration));" alt="Background 1" />
-      <img src="Screenshot%202025-10-22%20154814.png" onerror="this.remove()" style="animation-delay: calc(1 * var(--slide-duration));" alt="Background 2" />
-      <img src="Screenshot%202025-10-22%20154917.png" onerror="this.remove()" style="animation-delay: calc(2 * var(--slide-duration));" alt="Background 3" />
-      <img src="Screenshot%202025-10-22%20161310.png" onerror="this.remove()" style="animation-delay: calc(3 * var(--slide-duration));" alt="Background 4" />
-      <img src="Screenshot%202025-10-22%20161344.png" onerror="this.remove()" style="animation-delay: calc(4 * var(--slide-duration));" alt="Background 5" />
-      <img src="Screenshot%202025-10-22%20161407.png" onerror="this.remove()" style="animation-delay: calc(5 * var(--slide-duration));" alt="Background 6" />
-      <img src="Screenshot%202025-10-23%20112115.png" onerror="this.remove()" style="animation-delay: calc(6 * var(--slide-duration));" alt="Background 7" />
+      <!-- Static fallback images (show even if JS fails). These will be replaced by JS once it loads. -->
+      <img src="Screenshot%202025-10-22%20154733.png" onerror="this.remove()" alt="Background 1" />
+      <img src="Screenshot%202025-10-22%20154814.png" onerror="this.remove()" alt="Background 2" />
+      <img src="Screenshot%202025-10-22%20154917.png" onerror="this.remove()" alt="Background 3" />
+      <img src="Screenshot%202025-10-22%20161310.png" onerror="this.remove()" alt="Background 4" />
+      <img src="Screenshot%202025-10-22%20161344.png" onerror="this.remove()" alt="Background 5" />
+      <img src="Screenshot%202025-10-22%20161407.png" onerror="this.remove()" alt="Background 6" />
+      <img src="Screenshot%202025-10-23%20112115.png" onerror="this.remove()" alt="Background 7" />
     </div>
     <div class="overlay"></div>
 
@@ -169,5 +169,67 @@
   <footer>
     <small>© KotoBuki. Website draft for demonstration.</small>
   </footer>
+
+  <script>
+    // Robust image loader: tries multiple extensions & auto-encodes spaces
+    (function(){
+      const names = [
+        'Screenshot 2025-10-22 154733',
+        'Screenshot 2025-10-22 154814',
+        'Screenshot 2025-10-22 154917',
+        'Screenshot 2025-10-22 161310',
+        'Screenshot 2025-10-22 161344',
+        'Screenshot 2025-10-22 161407',
+        'Screenshot 2025-10-23 112115'
+      ];
+      const exts = ['png','PNG','jpg','JPG','jpeg','JPEG','webp','WEBP'];
+      const bg = document.querySelector('.bg');
+      const loaded = [];
+
+      function tryLoad(base){
+        return new Promise(resolve=>{
+          let idx = 0;
+          function next(){
+            if(idx >= exts.length){ resolve(null); return; }
+            const src = encodeURI(base + '.' + exts[idx++]);
+            const img = new Image();
+            img.onload = ()=> resolve(src);
+            img.onerror = next;
+            img.src = src;
+          }
+          next();
+        });
+      }
+
+      (async function(){
+        for(const n of names){
+          const src = await tryLoad(n);
+          if(src){ loaded.push(src); }
+        }
+        if(loaded.length === 0){
+          // Debug banner if nothing loaded
+          const warn = document.createElement('div');
+          warn.textContent = 'No slideshow images found next to index.html. Check filenames & extensions.';
+          warn.style.cssText = 'position:fixed;bottom:12px;left:12px;background:#b91c1c;color:#fff;padding:8px 12px;border-radius:8px;z-index:9999;font-size:14px;opacity:.9';
+          document.body.appendChild(warn);
+          return;
+        }
+        const root = document.documentElement;
+        const dur = getComputedStyle(root).getPropertyValue('--slide-duration').trim();
+
+        bg.innerHTML = '';
+        loaded.forEach((src,i)=>{
+          const el = document.createElement('img');
+          el.src = src; el.alt = 'Background '+(i+1);
+          el.style.animationDelay = `calc(${i} * ${dur})`;
+          el.style.position='absolute'; el.style.inset='0'; el.style.width='100%'; el.style.height='100%'; el.style.objectFit='cover';
+          el.style.opacity='0';
+          el.style.filter='brightness(1.08) contrast(1.06) saturate(1.12)';
+          el.style.animation = `fade var(--slide-duration) linear infinite`;
+          bg.appendChild(el);
+        });
+      })();
+    })();
+  </script>
 </body>
 </html>
