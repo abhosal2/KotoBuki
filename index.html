@@ -19,7 +19,8 @@
 
     .stage{position:relative;min-height:100dvh;overflow:hidden;background:#000;}
     .bg{position:absolute;inset:0;z-index:0;}
-    .bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;filter:brightness(1.08) contrast(1.06) saturate(1.12);animation:fade var(--slide-duration) linear infinite;}
+    .bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;filter:brightness(1.08) contrast(1.06) saturate(1.12);transition:opacity 1.2s ease-in-out;} 
+    .bg img.show{opacity:1;}
 
     .overlay{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,0.4),rgba(0,0,0,0.7));backdrop-filter:blur(1px);}
 
@@ -32,9 +33,9 @@
     .nav a:hover{background:rgba(255,255,255,.08)}
 
     .hero{display:grid;place-items:center;min-height:80dvh;padding:24px;text-align:center}
-    .hero h1{margin:8px 0 0;font-size:clamp(28px,5vw,54px);font-weight:800;text-shadow:0 8px 24px rgba(0,0,0,.45)}
-    .hero h2{margin:0;font-size:clamp(18px,3vw,26px);font-weight:700;opacity:.95}
-    .hero p{max-width:720px;margin:14px auto 0;font-size:clamp(15px,2.4vw,18px);opacity:.96}
+    .hero h1{margin:8px 0 0;font-size:clamp(28px,5vw,54px);font-weight:800;color:#ffffff;text-shadow:0 3px 16px rgba(0,0,0,.55), 0 0 2px rgba(0,0,0,.7);}
+    .hero h2{margin:0;font-size:clamp(18px,3vw,26px);font-weight:800;letter-spacing:.4px;color:#f5d36c;text-shadow:0 2px 10px rgba(0,0,0,.55);}
+    .hero p{max-width:720px;margin:14px auto 0;font-size:clamp(15px,2.4vw,18px);opacity:.98;text-shadow:0 2px 8px rgba(0,0,0,.6);}
     .cta{margin-top:22px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
     .btn{display:inline-block;padding:.9rem 1.2rem;border-radius:14px;border:1px solid rgba(255,255,255,.25);text-decoration:none;color:#fff}
     .btn.primary{background:linear-gradient(135deg,var(--accent),#a2a3f3)}
@@ -97,7 +98,7 @@
     </header>
 
     <div class="hero">
-      <div>
+      <div class="panel" style="background:rgba(0,0,0,.28); backdrop-filter: blur(4px); border:1px solid rgba(255,255,255,.12); border-radius:18px; padding:18px 20px;">
         <div class="logo-chip" aria-label="KotoBuki logo: kanji 寿 inside a ring">
           <svg width="64" height="64" viewBox="0 0 100 100" role="img" aria-hidden="true">
             <circle cx="50" cy="50" r="45" fill="#0a0a0a" stroke="#fff" stroke-width="10" />
@@ -215,19 +216,25 @@
           return;
         }
         const root = document.documentElement;
-        const dur = getComputedStyle(root).getPropertyValue('--slide-duration').trim();
+        const durStr = getComputedStyle(root).getPropertyValue('--slide-duration').trim();
+        const dur = parseFloat(durStr) * (durStr.includes('ms') ? 1 : 1000);
 
+        // Clear any static fallbacks and build slides
         bg.innerHTML = '';
-        loaded.forEach((src,i)=>{
+        const slides = loaded.map((src,i)=>{
           const el = document.createElement('img');
           el.src = src; el.alt = 'Background '+(i+1);
-          el.style.animationDelay = `calc(${i} * ${dur})`;
-          el.style.position='absolute'; el.style.inset='0'; el.style.width='100%'; el.style.height='100%'; el.style.objectFit='cover';
-          el.style.opacity='0';
-          el.style.filter='brightness(1.08) contrast(1.06) saturate(1.12)';
-          el.style.animation = `fade var(--slide-duration) linear infinite`;
           bg.appendChild(el);
+          return el;
         });
+
+        // Simple sequential crossfade
+        let idx = 0; const n = slides.length;
+        function show(i){
+          slides.forEach((s,j)=> s.classList.toggle('show', j===i));
+        }
+        show(0);
+        setInterval(()=>{ idx = (idx+1)%n; show(idx); }, dur);
       })();
     })();
   </script>
