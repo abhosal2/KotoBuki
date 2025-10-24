@@ -47,21 +47,27 @@
 
     .menus-section{background:var(--menu-bg);border-top:1px solid rgba(255,255,255,.06);position:relative;}
 
-    .sushi-divider{display:flex;justify-content:center;align-items:center;gap:10px;margin:6px 0 26px}
-    .maki{--s:28px;width:var(--s);height:var(--s);border-radius:50%;position:relative;box-shadow:0 2px 6px rgba(0,0,0,.35);background:
-      radial-gradient(circle at 50% 50%,#f3f0e4 38%,transparent 39%),
-      radial-gradient(circle at 50% 50%,#e65245 22%,transparent 23%),
-      radial-gradient(circle at 30% 40%,#f7c77b 12%,transparent 13%),
-      radial-gradient(circle at 70% 60%,#61a05f 10%,transparent 11%),
-      radial-gradient(circle at 50% 50%,#1a1a1a 65%,#000 66%);
-      animation: roll-spin 8s linear infinite, roll-bob 3.4s ease-in-out infinite;}
-    .maki:nth-child(2){animation-delay:.2s,.1s}
-    .maki:nth-child(3){animation-delay:.4s,.2s}
-    .maki:nth-child(4){animation-delay:.6s,.3s}
-    .maki:nth-child(5){animation-delay:.8s,.4s}
-    .maki:nth-child(6){animation-delay:1s,.5s}
+    .sushi-divider{display:flex;justify-content:center;align-items:center;gap:12px;margin:10px 0 30px}
+    /* Rainbow roll pieces (compact) */
+    .rainbow-maki{--s:34px; width:var(--s); height:var(--s); border-radius:50%; position:relative; box-shadow:0 2px 6px rgba(0,0,0,.35);
+      background:
+        /* Rice ring on top so center shows fillings */
+        radial-gradient(circle at 50% 50%, #f5f2e8 40%, transparent 41%),
+        /* Rainbow fillings (tuna/salmon/avocado) */
+        conic-gradient(from -35deg, #d94c4c 0 33%, #f39c4d 33% 66%, #78c86e 66% 100%),
+        /* Nori wrapper */
+        radial-gradient(circle at 50% 50%, #1a1a1a 66%, #000 68%);
+      animation: roll-spin 9s linear infinite, roll-bob 3.6s ease-in-out infinite;
+    }
+    .rainbow-maki:nth-child(2){animation-delay:.15s,.1s}
+    .rainbow-maki:nth-child(3){animation-delay:.3s,.2s}
+    .rainbow-maki:nth-child(4){animation-delay:.45s,.3s}
+    .rainbow-maki:nth-child(5){animation-delay:.6s,.4s}
+    .rainbow-maki:nth-child(6){animation-delay:.75s,.5s}
+    .rainbow-maki:nth-child(7){animation-delay:.9s,.6s}
+
     @keyframes roll-spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
-    @keyframes roll-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+    @keyframes roll-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}50%{transform:translateY(-3px)}}
 
     .card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:20px;color:#eef0f3}
     .grid{display:grid;gap:18px}
@@ -120,7 +126,14 @@
   <section id="menus" class="menus-section">
     <div class="wrap">
       <div class="sushi-divider" aria-hidden="true">
-        <div class="maki"></div>
+        <div class="rainbow-maki"></div>
+        <div class="rainbow-maki"></div>
+        <div class="rainbow-maki"></div>
+        <div class="rainbow-maki"></div>
+        <div class="rainbow-maki"></div>
+        <div class="rainbow-maki"></div>
+        <div class="rainbow-maki"></div>
+      </div>
         <div class="maki"></div>
         <div class="maki"></div>
         <div class="maki"></div>
