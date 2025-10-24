@@ -6,39 +6,41 @@
   <title>KotoBuki – Japanese Restaurant</title>
   <style>
     :root{
-      --slide-duration: 7s;
+      --slide-duration: 8s;
       --overlay-opacity: 0.22;
       --content-max: 960px;
       --brand: #0F2447;
-      --accent: #8384D4;
+      --accent: #f5d36c;
       --menu-bg: #1b1f2b;
     }
 
     *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#f3f4f6;background:#0a0a0a}
+    html,body{height:100%;margin:0;font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#f3f4f6;background:#0a0a0a;scroll-behavior:smooth;}
 
     .stage{position:relative;min-height:100dvh;overflow:hidden;background:#000;}
     .bg{position:absolute;inset:0;z-index:0;}
-    .bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;filter:brightness(1.08) contrast(1.06) saturate(1.12);transition:opacity 1.2s ease-in-out;} 
+    .bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;filter:brightness(1.15) contrast(1.1) saturate(1.2);transition:opacity 1.4s ease-in-out;}
     .bg img.show{opacity:1;}
 
-    .overlay{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,0.4),rgba(0,0,0,0.7));backdrop-filter:blur(1px);}
+    .overlay{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,0.45),rgba(0,0,0,0.75));backdrop-filter:blur(2px);}
 
-    header{position:sticky;top:0;backdrop-filter:saturate(1.2) blur(6px);background:rgba(0,0,0,0.35);border-bottom:1px solid rgba(255,255,255,0.12);z-index:10;}
+    header{position:sticky;top:0;backdrop-filter:saturate(1.4) blur(8px);background:rgba(0,0,0,0.4);border-bottom:1px solid rgba(255,255,255,0.12);z-index:10;}
     .nav{max-width:var(--content-max);margin:auto;display:flex;align-items:center;gap:16px;padding:14px 18px;}
     .brand{font-weight:800;letter-spacing:.4px}
     .brand .jp{font-size:.92em;opacity:.95;}
     .spacer{flex:1}
-    .nav a{color:#fff;text-decoration:none;padding:.45rem .8rem;border-radius:999px;border:1px solid rgba(255,255,255,.18);transition:background .2s}
-    .nav a:hover{background:rgba(255,255,255,.08)}
+    .nav a{color:#fff;text-decoration:none;padding:.45rem .8rem;border-radius:999px;border:1px solid rgba(255,255,255,.18);transition:all .25s ease;}
+    .nav a:hover{background:rgba(255,255,255,.12);box-shadow:0 0 8px rgba(245,211,108,.6)}
 
-    .hero{display:grid;place-items:center;min-height:80dvh;padding:24px;text-align:center}
-    .hero h1{margin:8px 0 0;font-size:clamp(28px,5vw,54px);font-weight:800;color:#ffffff;text-shadow:0 3px 16px rgba(0,0,0,.55), 0 0 2px rgba(0,0,0,.7);}
-    .hero h2{margin:0;font-size:clamp(18px,3vw,26px);font-weight:800;letter-spacing:.4px;color:#f5d36c;text-shadow:0 2px 10px rgba(0,0,0,.55);}
+    .hero{display:grid;place-items:center;min-height:80dvh;padding:24px;text-align:center;z-index:2;position:relative;}
+    .panel{background:rgba(0,0,0,.28);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:18px 20px;max-width:720px;margin:auto;}
+    .hero h1{margin:8px 0 0;font-size:clamp(28px,5vw,54px);font-weight:800;color:#fff;text-shadow:0 0 12px rgba(0,0,0,.8),0 0 4px rgba(255,255,255,.35);}
+    .hero h2{margin:0;font-size:clamp(18px,3vw,26px);font-weight:800;letter-spacing:.5px;color:var(--accent);text-shadow:0 0 12px rgba(0,0,0,.75);}
     .hero p{max-width:720px;margin:14px auto 0;font-size:clamp(15px,2.4vw,18px);opacity:.98;text-shadow:0 2px 8px rgba(0,0,0,.6);}
     .cta{margin-top:22px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-    .btn{display:inline-block;padding:.9rem 1.2rem;border-radius:14px;border:1px solid rgba(255,255,255,.25);text-decoration:none;color:#fff}
-    .btn.primary{background:linear-gradient(135deg,var(--accent),#a2a3f3)}
+    .btn{display:inline-block;padding:.9rem 1.2rem;border-radius:14px;border:1px solid rgba(255,255,255,.25);text-decoration:none;color:#fff;transition:all .25s ease;}
+    .btn.primary{background:linear-gradient(135deg,#8384D4,#a2a3f3)}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 0 8px rgba(255,255,255,.2)}
 
     section{scroll-margin-top:72px}
     .wrap{max-width:var(--content-max);margin:auto;padding:42px 18px}
@@ -75,7 +77,6 @@
 <body>
   <div class="stage" id="top">
     <div class="bg" aria-hidden="true">
-      <!-- Static fallback images (show even if JS fails). These will be replaced by JS once it loads. -->
       <img src="Screenshot%202025-10-22%20154733.png" onerror="this.remove()" alt="Background 1" />
       <img src="Screenshot%202025-10-22%20154814.png" onerror="this.remove()" alt="Background 2" />
       <img src="Screenshot%202025-10-22%20154917.png" onerror="this.remove()" alt="Background 3" />
@@ -98,7 +99,7 @@
     </header>
 
     <div class="hero">
-      <div class="panel" style="background:rgba(0,0,0,.28); backdrop-filter: blur(4px); border:1px solid rgba(255,255,255,.12); border-radius:18px; padding:18px 20px;">
+      <div class="panel">
         <div class="logo-chip" aria-label="KotoBuki logo: kanji 寿 inside a ring">
           <svg width="64" height="64" viewBox="0 0 100 100" role="img" aria-hidden="true">
             <circle cx="50" cy="50" r="45" fill="#0a0a0a" stroke="#fff" stroke-width="10" />
@@ -172,71 +173,17 @@
   </footer>
 
   <script>
-    // Robust image loader: tries multiple extensions & auto-encodes spaces
-    (function(){
-      const names = [
-        'Screenshot 2025-10-22 154733',
-        'Screenshot 2025-10-22 154814',
-        'Screenshot 2025-10-22 154917',
-        'Screenshot 2025-10-22 161310',
-        'Screenshot 2025-10-22 161344',
-        'Screenshot 2025-10-22 161407',
-        'Screenshot 2025-10-23 112115'
-      ];
-      const exts = ['png','PNG','jpg','JPG','jpeg','JPEG','webp','WEBP'];
-      const bg = document.querySelector('.bg');
-      const loaded = [];
-
-      function tryLoad(base){
-        return new Promise(resolve=>{
-          let idx = 0;
-          function next(){
-            if(idx >= exts.length){ resolve(null); return; }
-            const src = encodeURI(base + '.' + exts[idx++]);
-            const img = new Image();
-            img.onload = ()=> resolve(src);
-            img.onerror = next;
-            img.src = src;
-          }
-          next();
-        });
-      }
-
-      (async function(){
-        for(const n of names){
-          const src = await tryLoad(n);
-          if(src){ loaded.push(src); }
-        }
-        if(loaded.length === 0){
-          // Debug banner if nothing loaded
-          const warn = document.createElement('div');
-          warn.textContent = 'No slideshow images found next to index.html. Check filenames & extensions.';
-          warn.style.cssText = 'position:fixed;bottom:12px;left:12px;background:#b91c1c;color:#fff;padding:8px 12px;border-radius:8px;z-index:9999;font-size:14px;opacity:.9';
-          document.body.appendChild(warn);
-          return;
-        }
-        const root = document.documentElement;
-        const durStr = getComputedStyle(root).getPropertyValue('--slide-duration').trim();
-        const dur = parseFloat(durStr) * (durStr.includes('ms') ? 1 : 1000);
-
-        // Clear any static fallbacks and build slides
-        bg.innerHTML = '';
-        const slides = loaded.map((src,i)=>{
-          const el = document.createElement('img');
-          el.src = src; el.alt = 'Background '+(i+1);
-          bg.appendChild(el);
-          return el;
-        });
-
-        // Simple sequential crossfade
-        let idx = 0; const n = slides.length;
-        function show(i){
-          slides.forEach((s,j)=> s.classList.toggle('show', j===i));
-        }
-        show(0);
-        setInterval(()=>{ idx = (idx+1)%n; show(idx); }, dur);
-      })();
-    })();
+    // Sequential fade slideshow
+    const images = document.querySelectorAll('.bg img');
+    let index = 0;
+    if(images.length > 0){
+      images[index].classList.add('show');
+      setInterval(()=>{
+        images[index].classList.remove('show');
+        index = (index + 1) % images.length;
+        images[index].classList.add('show');
+      }, 8000);
+    }
   </script>
 </body>
 </html>
