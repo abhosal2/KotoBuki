@@ -9,20 +9,25 @@
       --slide-duration: 8s;
       --overlay-opacity: 0.22;
       --content-max: 960px;
-      --brand: #0F2447;
       --accent: #f5d36c;
       --menu-bg: #1b1f2b;
     }
 
     *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#f3f4f6;background:#0a0a0a;scroll-behavior:smooth;}
+    html,body{
+      height:100%;
+      margin:0;
+      font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:#f3f4f6;
+      background:#0a0a0a;
+      scroll-behavior:smooth;
+    }
 
     .stage{position:relative;min-height:100dvh;overflow:hidden;background:#000;}
     .bg{position:absolute;inset:0;z-index:0;}
     .bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;filter:brightness(1.15) contrast(1.1) saturate(1.2);transition:opacity 1.4s ease-in-out;}
     .bg img.show{opacity:1;}
-
-    .overlay{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,0.45),rgba(0,0,0,0.75));backdrop-filter:blur(2px);}
+    .overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,0.45),rgba(0,0,0,0.75));backdrop-filter:blur(2px);}
 
     header{position:sticky;top:0;backdrop-filter:saturate(1.4) blur(8px);background:rgba(0,0,0,0.4);border-bottom:1px solid rgba(255,255,255,0.12);z-index:10;}
     .nav{max-width:var(--content-max);margin:auto;display:flex;align-items:center;gap:16px;padding:14px 18px;}
@@ -45,47 +50,47 @@
     section{scroll-margin-top:72px}
     .wrap{max-width:var(--content-max);margin:auto;padding:42px 18px}
 
-    /* --- Fish Divider --- */
-    .fish-divider{
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      gap:16px;
-      margin:20px 0 30px;
+    /* --- KOI DIVIDER --- */
+    .koi-divider {
+      position: relative;
+      height: 80px;
+      margin: 20px 0 40px;
+      overflow: hidden;
     }
-    .fish-divider .fish{
-      width:40px;height:20px;
-      background:linear-gradient(90deg,#5aa3e1,#c7f0ff);
-      border-radius:50% 50% 50% 50%/60% 40% 60% 40%;
-      position:relative;
-      animation:swim 2.5s ease-in-out infinite;
-      transform-origin:center;
+    .koi {
+      position: absolute;
+      width: 60px;
+      height: 30px;
+      background: linear-gradient(90deg,#c53,#ffae7f);
+      border-radius: 50% 50% 50% 50%/60% 40% 60% 40%;
+      top: 30%;
+      animation: swimAcross 10s linear infinite;
+      opacity: 0.8;
     }
-    .fish::before{
+    .koi::before {
       content:"";
       position:absolute;
-      right:-10px;top:50%;
-      width:0;height:0;
-      border-top:8px solid transparent;
-      border-bottom:8px solid transparent;
-      border-left:12px solid #5aa3e1;
+      right:-10px;
+      top:50%;
+      width:0;
+      height:0;
+      border-top:7px solid transparent;
+      border-bottom:7px solid transparent;
+      border-left:12px solid #c53;
       transform:translateY(-50%);
     }
-    @keyframes swim{
-      0%,100%{transform:translateY(0) rotate(0deg);}
-      50%{transform:translateY(-4px) rotate(3deg);}
+    .koi:nth-child(2){top:50%;width:50px;height:25px;animation-delay:3s;opacity:.7;}
+    .koi:nth-child(3){top:65%;width:40px;height:20px;animation-delay:6s;opacity:.6;}
+    @keyframes swimAcross{
+      0%{left:-80px;transform:rotateY(0deg);}
+      50%{transform:translateY(-5px);}
+      100%{left:100vw;transform:rotateY(0deg);}
     }
 
-    .card{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:20px;color:#eef0f3;box-shadow:0 6px 18px rgba(0,0,0,.25)}
-    .grid{display:grid;gap:18px}
-    @media(min-width:720px){.grid{grid-template-columns:1fr 1fr}}
-
-    footer{padding:30px 18px;text-align:center;opacity:.85}
-
     /* ---- Menus section ---- */
-    .menus-section{background:var(--menu-bg);border-top:1px solid rgba(255,255,255,.06);position:relative;padding-bottom:60px;}
+    .menus-section{background:var(--menu-bg);border-top:1px solid rgba(255,255,255,.06);padding-bottom:60px;}
     .menus-section .wrap{display:flex;flex-direction:column;align-items:center;}
-    .menus-section h2{width:100%;text-align:center;margin:12px 0 24px;color:#fff}
+    .menus-section h2{text-align:center;margin:12px 0 24px;color:#fff}
     .menus-section .grid{
       width:100%;max-width:1000px;margin:0 auto;
       display:grid;gap:30px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
@@ -96,22 +101,21 @@
       border-radius:20px;padding:24px;text-align:center;color:#fff;
       box-shadow:0 8px 24px rgba(0,0,0,0.35);
       transition:transform .25s ease, box-shadow .25s ease;
-      height:100%;
     }
     .menus-section .card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(0,0,0,0.5)}
-    .menus-section .card h3{font-size:1.25rem;margin:0 0 10px}
-    .menus-section .card:nth-child(1) h3{color:#803080;}
-    .menus-section .card:nth-child(2) h3{color:#151C63;}
-    .menus-section .card p{opacity:.95;margin:.4rem 0}
+    .menus-section .card:nth-child(1) h3{color:#A3230B;}
+    .menus-section .card:nth-child(2) h3{color:#8A3508;}
+    .menus-section .card h3{font-size:1.3rem;margin-bottom:10px;}
+    .menus-section .card p{opacity:.95;margin:.4rem 0;}
     .menus-section .card .btn{
-      display:inline-block;width:auto;text-align:center;
-      background:linear-gradient(135deg,#8384D4,#a2a3f3);
+      display:inline-block;background:linear-gradient(135deg,#8384D4,#a2a3f3);
       border:1px solid rgba(255,255,255,.25);
       border-radius:12px;padding:10px 18px;margin-top:10px;
       color:#fff;font-weight:600;text-decoration:none;transition:transform .25s ease, box-shadow .25s ease;
     }
-    .menus-section .card .btn:hover{transform:scale(1.04);box-shadow:0 0 12px rgba(255,255,255,.4)}
-    .menus-section .note{font-size:.9rem;opacity:.8;margin-top:8px}
+    .menus-section .card .btn:hover{transform:scale(1.05);box-shadow:0 0 12px rgba(255,255,255,.4)}
+
+    footer{padding:30px 18px;text-align:center;opacity:.85}
 
     .logo-chip{width:64px;height:64px;margin:0 auto 10px}
   </style>
@@ -119,13 +123,13 @@
 <body>
   <div class="stage" id="top">
     <div class="bg" aria-hidden="true">
-      <img src="Screenshot%202025-10-22%20154733.png" onerror="this.remove()" alt="Background 1" />
-      <img src="Screenshot%202025-10-22%20154814.png" onerror="this.remove()" alt="Background 2" />
-      <img src="Screenshot%202025-10-22%20154917.png" onerror="this.remove()" alt="Background 3" />
-      <img src="Screenshot%202025-10-22%20161310.png" onerror="this.remove()" alt="Background 4" />
-      <img src="Screenshot%202025-10-22%20161344.png" onerror="this.remove()" alt="Background 5" />
-      <img src="Screenshot%202025-10-22%20161407.png" onerror="this.remove()" alt="Background 6" />
-      <img src="Screenshot%202025-10-23%20112115.png" onerror="this.remove()" alt="Background 7" />
+      <img src="Screenshot%202025-10-22%20154733.png" alt="Background 1" />
+      <img src="Screenshot%202025-10-22%20154814.png" alt="Background 2" />
+      <img src="Screenshot%202025-10-22%20154917.png" alt="Background 3" />
+      <img src="Screenshot%202025-10-22%20161310.png" alt="Background 4" />
+      <img src="Screenshot%202025-10-22%20161344.png" alt="Background 5" />
+      <img src="Screenshot%202025-10-22%20161407.png" alt="Background 6" />
+      <img src="Screenshot%202025-10-23%20112115.png" alt="Background 7" />
     </div>
     <div class="overlay"></div>
 
@@ -133,17 +137,17 @@
       <nav class="nav">
         <div class="brand">KotoBuki <span class="jp">– Japanese Restaurant</span></div>
         <div class="spacer"></div>
-        <a href="#menus" title="View Menus">Menus</a>
-        <a href="#contact" title="Contact & Location">Contact</a>
-        <a href="#hours" title="Hours">Hours</a>
-        <a href="https://www.instagram.com/kotobukidennis/?hl=en" rel="noopener" target="_blank" title="Instagram">Instagram</a>
+        <a href="#menus">Menus</a>
+        <a href="#contact">Contact</a>
+        <a href="#hours">Hours</a>
+        <a href="https://www.instagram.com/kotobukidennis/?hl=en" target="_blank" rel="noopener">Instagram</a>
       </nav>
     </header>
 
     <div class="hero">
       <div class="panel">
-        <div class="logo-chip" aria-label="KotoBuki logo: kanji 寿 inside a ring">
-          <svg width="64" height="64" viewBox="0 0 100 100" role="img" aria-hidden="true">
+        <div class="logo-chip">
+          <svg width="64" height="64" viewBox="0 0 100 100">
             <circle cx="50" cy="50" r="45" fill="#0a0a0a" stroke="#fff" stroke-width="10" />
             <text x="50" y="63" text-anchor="middle" font-size="64" fill="#ffffff" font-family="Noto Sans JP, sans-serif">寿</text>
           </svg>
@@ -161,11 +165,10 @@
 
   <section id="menus" class="menus-section">
     <div class="wrap">
-      <div class="fish-divider" aria-hidden="true">
-        <div class="fish"></div>
-        <div class="fish"></div>
-        <div class="fish"></div>
-        <div class="fish"></div>
+      <div class="koi-divider" aria-hidden="true">
+        <div class="koi"></div>
+        <div class="koi"></div>
+        <div class="koi"></div>
       </div>
 
       <h2>Menus</h2>
@@ -217,13 +220,13 @@
     // Sequential fade slideshow
     const images = document.querySelectorAll('.bg img');
     let index = 0;
-    if(images.length > 0){
+    if(images.length){
       images[index].classList.add('show');
       setInterval(()=>{
         images[index].classList.remove('show');
         index = (index + 1) % images.length;
         images[index].classList.add('show');
-      }, 8000);
+      },8000);
     }
   </script>
 </body>
