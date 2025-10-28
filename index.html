@@ -45,29 +45,35 @@
     section{scroll-margin-top:72px}
     .wrap{max-width:var(--content-max);margin:auto;padding:42px 18px}
 
-    /* ---- Sushi divider ---- */
-    .sushi-divider{display:flex;justify-content:center;align-items:center;gap:12px;margin:10px 0 30px}
-    .rainbow-maki{
-      --s:34px;
-      width:var(--s); height:var(--s); border-radius:50%; position:relative;
-      box-shadow:0 2px 6px rgba(0,0,0,.35);
-      background:
-        radial-gradient(circle at 50% 50%, #f5f2e8 40%, transparent 41%),
-        conic-gradient(from -35deg, #d94c4c 0 33%, #f39c4d 33% 66%, #78c86e 66% 100%),
-        radial-gradient(circle at 50% 50%, #1a1a1a 66%, #000 68%);
-      animation: roll-spin 9s linear infinite, roll-bob 3.6s ease-in-out infinite;
+    /* --- Fish Divider --- */
+    .fish-divider{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:16px;
+      margin:20px 0 30px;
     }
-    .rainbow-maki:nth-child(2){animation-delay:.15s,.1s}
-    .rainbow-maki:nth-child(3){animation-delay:.3s,.2s}
-    .rainbow-maki:nth-child(4){animation-delay:.45s,.3s}
-    .rainbow-maki:nth-child(5){animation-delay:.6s,.4s}
-    .rainbow-maki:nth-child(6){animation-delay:.75s,.5s}
-    .rainbow-maki:nth-child(7){animation-delay:.9s,.6s}
-
-    @keyframes roll-spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
-    @keyframes roll-bob{
-      0%,100%{transform:translateY(0)}
-      50%{transform:translateY(-3px)}
+    .fish-divider .fish{
+      width:40px;height:20px;
+      background:linear-gradient(90deg,#5aa3e1,#c7f0ff);
+      border-radius:50% 50% 50% 50%/60% 40% 60% 40%;
+      position:relative;
+      animation:swim 2.5s ease-in-out infinite;
+      transform-origin:center;
+    }
+    .fish::before{
+      content:"";
+      position:absolute;
+      right:-10px;top:50%;
+      width:0;height:0;
+      border-top:8px solid transparent;
+      border-bottom:8px solid transparent;
+      border-left:12px solid #5aa3e1;
+      transform:translateY(-50%);
+    }
+    @keyframes swim{
+      0%,100%{transform:translateY(0) rotate(0deg);}
+      50%{transform:translateY(-4px) rotate(3deg);}
     }
 
     .card{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:20px;color:#eef0f3;box-shadow:0 6px 18px rgba(0,0,0,.25)}
@@ -76,7 +82,7 @@
 
     footer{padding:30px 18px;text-align:center;opacity:.85}
 
-    /* ---- Menus section (separate boxes) ---- */
+    /* ---- Menus section ---- */
     .menus-section{background:var(--menu-bg);border-top:1px solid rgba(255,255,255,.06);position:relative;padding-bottom:60px;}
     .menus-section .wrap{display:flex;flex-direction:column;align-items:center;}
     .menus-section h2{width:100%;text-align:center;margin:12px 0 24px;color:#fff}
@@ -93,7 +99,9 @@
       height:100%;
     }
     .menus-section .card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(0,0,0,0.5)}
-    .menus-section .card h3{font-size:1.25rem;color:var(--accent);margin:0 0 10px}
+    .menus-section .card h3{font-size:1.25rem;margin:0 0 10px}
+    .menus-section .card:nth-child(1) h3{color:#803080;}
+    .menus-section .card:nth-child(2) h3{color:#151C63;}
     .menus-section .card p{opacity:.95;margin:.4rem 0}
     .menus-section .card .btn{
       display:inline-block;width:auto;text-align:center;
@@ -104,8 +112,6 @@
     }
     .menus-section .card .btn:hover{transform:scale(1.04);box-shadow:0 0 12px rgba(255,255,255,.4)}
     .menus-section .note{font-size:.9rem;opacity:.8;margin-top:8px}
-
-    @keyframes fade{0%,10%{opacity:0}15%,85%{opacity:1}90%,100%{opacity:0}}
 
     .logo-chip{width:64px;height:64px;margin:0 auto 10px}
   </style>
@@ -124,7 +130,7 @@
     <div class="overlay"></div>
 
     <header>
-      <nav class="nav" aria-label="Primary">
+      <nav class="nav">
         <div class="brand">KotoBuki <span class="jp">– Japanese Restaurant</span></div>
         <div class="spacer"></div>
         <a href="#menus" title="View Menus">Menus</a>
@@ -153,57 +159,52 @@
     </div>
   </div>
 
-  <section id="menus" class="menus-section" aria-labelledby="menus-heading">
+  <section id="menus" class="menus-section">
     <div class="wrap">
-      <div class="sushi-divider" aria-hidden="true">
-        <div class="rainbow-maki"></div>
-        <div class="rainbow-maki"></div>
-        <div class="rainbow-maki"></div>
-        <div class="rainbow-maki"></div>
-        <div class="rainbow-maki"></div>
-        <div class="rainbow-maki"></div>
-        <div class="rainbow-maki"></div>
+      <div class="fish-divider" aria-hidden="true">
+        <div class="fish"></div>
+        <div class="fish"></div>
+        <div class="fish"></div>
+        <div class="fish"></div>
       </div>
 
-      <h2 id="menus-heading">Menus</h2>
-      <div class="grid" role="list">
-        <div class="card" role="listitem">
+      <h2>Menus</h2>
+      <div class="grid">
+        <div class="card">
           <h3>Full Menu (PDF)</h3>
           <p>Opens a PDF in a new tab.</p>
-          <p><a class="btn" href="Kotobuki-Menu-September-2022.pdf" target="_blank" rel="noopener" aria-label="Open Full Menu PDF">Open • Kotobuki-Menu-September-2022.pdf</a></p>
-          <p class="note">Make sure the PDF file name and capitalization exactly match.</p>
+          <p><a class="btn" href="Kotobuki-Menu-September-2022.pdf" target="_blank" rel="noopener">Open • Kotobuki-Menu-September-2022.pdf</a></p>
         </div>
-        <div class="card" role="listitem">
+        <div class="card">
           <h3>Sushi Menu (PDF)</h3>
           <p>Opens a PDF in a new tab.</p>
-          <p><a class="btn" href="Kotobuki-Sushi-Menu-September-2022.pdf" target="_blank" rel="noopener" aria-label="Open Sushi Menu PDF">Open • Kotobuki-Sushi-Menu-September-2022.pdf</a></p>
-          <p class="note">Place the PDF in the same folder as this HTML.</p>
+          <p><a class="btn" href="Kotobuki-Sushi-Menu-September-2022.pdf" target="_blank" rel="noopener">Open • Kotobuki-Sushi-Menu-September-2022.pdf</a></p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="hours" style="background:#111318;border-top:1px solid rgba(255,255,255,.06);" aria-labelledby="hours-heading">
+  <section id="hours" style="background:#111318;border-top:1px solid rgba(255,255,255,.06);">
     <div class="wrap">
-      <h2 id="hours-heading">Hours</h2>
-      <div class="card" role="group" aria-label="Business hours">
-        <p style="margin:.25rem 0 .5rem;opacity:.95"><strong>Lunch</strong></p>
-        <p style="margin:.15rem 0">Mon – Sat: 11:30 AM – 2:00 PM</p>
-        <p style="margin:.9rem 0 .5rem;opacity:.95"><strong>Dinner</strong></p>
-        <p style="margin:.15rem 0">Mon – Thu: 5:00 PM – 9:30 PM</p>
-        <p style="margin:.15rem 0">Fri – Sat: 5:00 PM – 10:30 PM</p>
-        <p style="margin:1rem 0 0;opacity:.9"><strong>Sunday:</strong> Closed</p>
+      <h2>Hours</h2>
+      <div class="card">
+        <p><strong>Lunch</strong></p>
+        <p>Mon – Sat: 11:30 AM – 2:00 PM</p>
+        <p><strong>Dinner</strong></p>
+        <p>Mon – Thu: 5:00 PM – 9:30 PM</p>
+        <p>Fri – Sat: 5:00 PM – 10:30 PM</p>
+        <p><strong>Sunday:</strong> Closed</p>
       </div>
     </div>
   </section>
 
-  <section id="contact" style="background:#111318;border-top:1px solid rgba(255,255,255,.06);" aria-labelledby="contact-heading">
+  <section id="contact" style="background:#111318;border-top:1px solid rgba(255,255,255,.06);">
     <div class="wrap">
-      <h2 id="contact-heading">Contact</h2>
+      <h2>Contact</h2>
       <div class="card">
         <p><strong>For reservations and to-go orders call:</strong></p>
-        <p><a class="btn" href="tel:+14198828711" aria-label="Call Kotobuki">(419) 882-8711</a></p>
-        <p><strong>Instagram:</strong> <a class="btn" href="https://www.instagram.com/kotobukidennis/?hl=en" target="_blank" rel="noopener" aria-label="Open Instagram @kotobukidennis">@kotobukidennis</a></p>
+        <p><a class="btn" href="tel:+14198828711">(419) 882-8711</a></p>
+        <p><strong>Instagram:</strong> <a class="btn" href="https://www.instagram.com/kotobukidennis/?hl=en" target="_blank" rel="noopener">@kotobukidennis</a></p>
       </div>
     </div>
   </section>
