@@ -50,16 +50,31 @@
     section{scroll-margin-top:72px}
     .wrap{max-width:var(--content-max);margin:auto;padding:42px 18px}
 
-    /* --- Emoji Fish Divider (universal emoji + crisp size) --- */
+    /* --- Animated Emoji Fish Divider --- */
     .emoji-divider{
       text-align:center;
-      font-size:2.1rem;      /* slightly larger but not huge */
+      font-size:2.1rem;
       line-height:1.4;
       margin:25px 0 40px;
-      opacity:1;             /* full visibility */
-      /* prefer emoji-capable fonts to ensure rendering */
-      font-family: "Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji", system-ui, sans-serif;
-      letter-spacing:.15rem; /* even spacing between fish */
+      opacity:1;
+      font-family:"Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji",system-ui,sans-serif;
+      letter-spacing:.15rem;
+      display:flex;
+      justify-content:center;
+      gap:.5rem;
+    }
+    .emoji-divider span{
+      display:inline-block;
+      animation: floatFish 4s ease-in-out infinite;
+    }
+    .emoji-divider span:nth-child(2){animation-delay:0.5s;}
+    .emoji-divider span:nth-child(3){animation-delay:1s;}
+    .emoji-divider span:nth-child(4){animation-delay:1.5s;}
+    .emoji-divider span:nth-child(5){animation-delay:2s;}
+
+    @keyframes floatFish {
+      0%,100% { transform:translateY(0); }
+      50% { transform:translateY(-6px); }
     }
 
     /* ---- Menus section ---- */
@@ -141,7 +156,7 @@
   <section id="menus" class="menus-section">
     <div class="wrap">
       <div class="emoji-divider" aria-hidden="true">
-        🐟 🐠 🐡 🐠 🐟
+        <span>🐟</span><span>🐠</span><span>🐡</span><span>🐠</span><span>🐟</span>
       </div>
 
       <h2>Menus</h2>
