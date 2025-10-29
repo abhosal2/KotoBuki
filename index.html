@@ -50,41 +50,13 @@
     section{scroll-margin-top:72px}
     .wrap{max-width:var(--content-max);margin:auto;padding:42px 18px}
 
-    /* --- KOI DIVIDER --- */
-    .koi-divider {
-      position: relative;
-      height: 80px;
-      margin: 20px 0 40px;
-      overflow: hidden;
-    }
-    .koi {
-      position: absolute;
-      width: 60px;
-      height: 30px;
-      background: linear-gradient(90deg,#c53,#ffae7f);
-      border-radius: 50% 50% 50% 50%/60% 40% 60% 40%;
-      top: 30%;
-      animation: swimAcross 10s linear infinite;
-      opacity: 0.8;
-    }
-    .koi::before {
-      content:"";
-      position:absolute;
-      right:-10px;
-      top:50%;
-      width:0;
-      height:0;
-      border-top:7px solid transparent;
-      border-bottom:7px solid transparent;
-      border-left:12px solid #c53;
-      transform:translateY(-50%);
-    }
-    .koi:nth-child(2){top:50%;width:50px;height:25px;animation-delay:3s;opacity:.7;}
-    .koi:nth-child(3){top:65%;width:40px;height:20px;animation-delay:6s;opacity:.6;}
-    @keyframes swimAcross{
-      0%{left:-80px;transform:rotateY(0deg);}
-      50%{transform:translateY(-5px);}
-      100%{left:100vw;transform:rotateY(0deg);}
+    /* --- Emoji Fish Divider --- */
+    .emoji-divider {
+      text-align: center;
+      font-size: 2.2rem;
+      line-height: 1.5;
+      margin: 25px 0 40px;
+      opacity: 0.9;
     }
 
     /* ---- Menus section ---- */
@@ -104,7 +76,7 @@
     }
     .menus-section .card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(0,0,0,0.5)}
     .menus-section .card:nth-child(1) h3{color:#A3230B;}   /* Full Menu */
-    .menus-section .card:nth-child(2) h3{color:#AB0E0E;}  /* Sushi Menu updated */
+    .menus-section .card:nth-child(2) h3{color:#AB0E0E;}  /* Sushi Menu */
     .menus-section .card h3{font-size:1.3rem;margin-bottom:10px;}
     .menus-section .card p{opacity:.95;margin:.4rem 0;}
     .menus-section .card .btn{
@@ -165,10 +137,8 @@
 
   <section id="menus" class="menus-section">
     <div class="wrap">
-      <div class="koi-divider" aria-hidden="true">
-        <div class="koi"></div>
-        <div class="koi"></div>
-        <div class="koi"></div>
+      <div class="emoji-divider" aria-hidden="true">
+        𓆝 𓆟 𓆞 𓆟 𓆝
       </div>
 
       <h2>Menus</h2>
