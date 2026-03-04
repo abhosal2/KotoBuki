@@ -581,13 +581,149 @@
       opacity: 0.28;
     }
 
-    /* ─── RESPONSIVE ──────────────────────────────────── */
-    @media (max-width: 600px) {
+    /* ─── HAMBURGER & MOBILE DRAWER ──────────────────── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: 1px solid var(--border-md);
+      border-radius: 6px;
+      padding: 8px 10px;
+      cursor: pointer;
+      margin-left: 8px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 18px;
+      height: 1.5px;
+      background: var(--cream);
+      border-radius: 2px;
+      transition: all 0.25s;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    .mobile-drawer {
+      display: none;
+      position: fixed;
+      top: 52px;
+      left: 0; right: 0;
+      background: rgba(10,10,11,0.97);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      z-index: 19;
+      flex-direction: column;
+      padding: 12px 0 20px;
+    }
+    .mobile-drawer.open { display: flex; }
+    .mobile-drawer a {
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 14px 24px;
+      border-bottom: 1px solid var(--border);
+      opacity: 0.75;
+      transition: opacity 0.2s, background 0.2s;
+    }
+    .mobile-drawer a:last-child { border-bottom: none; }
+    .mobile-drawer a:hover { opacity: 1; background: var(--mist); }
+    .mobile-drawer a.drawer-cta { color: var(--gold-lt); opacity: 1; }
+
+    @media (max-width: 768px) {
+      .nav-hamburger { display: flex; }
+      .mobile-drawer { top: 56px; }
+    }
+    @media (max-width: 480px) {
+      .mobile-drawer { top: 52px; }
+    }
+    @media (max-width: 768px) {
+      /* Nav: hide text links, show hamburger-style stacked brand */
+      .nav { padding: 0 16px; height: 56px; }
+      .nav-links a:not(.nav-cta) { display: none; }
       .nav-links { gap: 0; }
-      .nav-links a { padding: 6px 10px; font-size: 0.67rem; }
-      .brand-text { font-size: 1rem; }
-      .hero { justify-content: center; padding-bottom: 48px; }
+      .nav-links a.nav-cta {
+        font-size: 0.68rem;
+        padding: 6px 12px;
+      }
+      .brand-text { font-size: 1.05rem; }
+      .brand-sub { font-size: 0.58rem; }
+      .brand-kanji { width: 30px; height: 30px; font-size: 1rem; }
+
+      /* Hero: centre-aligned, tighter spacing */
+      .hero {
+        justify-content: center;
+        padding: 0 20px 60px;
+        text-align: center;
+      }
+      .hero h1 { font-size: clamp(36px, 9vw, 56px); }
+      .hero p { font-size: 0.9rem; max-width: 400px; }
+      .hero-rule { margin: 16px auto; }
+      .hero-cta { flex-direction: column; align-items: center; gap: 10px; }
+      .hero-cta .btn { width: 100%; max-width: 300px; justify-content: center; }
+
+      /* Sections: reduce vertical padding */
+      .wrap { padding: 56px 16px; }
+      .section-title { font-size: clamp(24px, 5vw, 32px); margin-bottom: 32px; }
+
+      /* Menus: stack cards vertically */
+      .menus-grid { grid-template-columns: 1fr; }
+      .menu-card { padding: 28px 24px; }
+
+      /* Hours: stack blocks */
       .hours-grid { grid-template-columns: 1fr; }
+      .hours-block { padding: 24px 20px; }
+
+      /* Contact: stack cards */
+      .contact-grid { grid-template-columns: 1fr; gap: 16px; }
+      .contact-item { padding: 22px 20px; }
+
+      /* Footer */
+      .footer-inner { flex-direction: column; text-align: center; gap: 8px; }
+    }
+
+    /* ─── RESPONSIVE: MOBILE (≤ 480px) ───────────────── */
+    @media (max-width: 480px) {
+      .nav { height: 52px; }
+      .brand-text { font-size: 0.95rem; }
+      .brand-sub { display: none; }
+
+      .hero { padding: 0 16px 48px; }
+      .hero-eyebrow { font-size: 0.82rem; letter-spacing: 0.22em; }
+      .hero h1 { font-size: clamp(32px, 11vw, 48px); }
+      .hero p { font-size: 0.85rem; }
+      .hero-cta .btn { max-width: 100%; font-size: 0.68rem; padding: 12px 18px; }
+
+      .wrap { padding: 44px 14px; }
+      .kamon-divider { margin-bottom: 36px; }
+
+      .menu-card { padding: 24px 18px; }
+      .menu-card-icon { font-size: 1.6rem; }
+      .menu-card h3 { font-size: 1.25rem; }
+
+      .hours-block .row { font-size: 0.78rem; }
+      .hours-block .row .time { font-size: 0.88rem; }
+
+      .contact-item .value { font-size: 1.1rem; }
+      .btn { font-size: 0.68rem; padding: 11px 16px; }
+    }
+
+    /* ─── RESPONSIVE: LANDSCAPE PHONE ────────────────── */
+    @media (max-width: 768px) and (orientation: landscape) {
+      .hero {
+        min-height: 100dvh;
+        justify-content: center;
+        padding: 0 24px 32px;
+      }
+      .hero h1 { font-size: clamp(28px, 6vw, 44px); }
+      .hero-cta { flex-direction: row; }
+      .hero-cta .btn { width: auto; max-width: none; }
     }
   </style>
 </head>
@@ -622,6 +758,9 @@
           <a href="#contact">Contact</a>
           <a class="nav-cta" href="https://www.instagram.com/kotobukidennis/?hl=en" target="_blank" rel="noopener">Instagram</a>
         </div>
+        <button class="nav-hamburger" aria-label="Open menu" onclick="toggleMenu()">
+          <span></span><span></span><span></span>
+        </button>
       </nav>
     </header>
 
@@ -730,7 +869,26 @@
     </div>
   </footer>
 
+  <!-- ── MOBILE NAV DRAWER ── -->
+  <nav class="mobile-drawer" id="mobileDrawer">
+    <a href="#menus" onclick="closeMenu()">Menus</a>
+    <a href="#hours" onclick="closeMenu()">Hours</a>
+    <a href="#contact" onclick="closeMenu()">Contact</a>
+    <a class="drawer-cta" href="https://www.instagram.com/kotobukidennis/?hl=en" target="_blank" rel="noopener" onclick="closeMenu()">Instagram</a>
+  </nav>
+
   <script>
+    function toggleMenu() {
+      const btn = document.querySelector('.nav-hamburger');
+      const drawer = document.getElementById('mobileDrawer');
+      btn.classList.toggle('open');
+      drawer.classList.toggle('open');
+    }
+    function closeMenu() {
+      document.querySelector('.nav-hamburger').classList.remove('open');
+      document.getElementById('mobileDrawer').classList.remove('open');
+    }
+
     // Sequential fade slideshow
     const images = document.querySelectorAll('.bg img');
     let idx = 0;
