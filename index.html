@@ -318,39 +318,7 @@
       transform: translateY(-1px);
     }
 
-    /* ─── SCROLL INDICATOR ────────────────────────────── */
-    .scroll-hint {
-      position: absolute;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 3;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      opacity: 0;
-      animation: fadeUp 1s var(--ease) 1.5s forwards;
-    }
 
-    .scroll-hint span {
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      opacity: 0.4;
-    }
-
-    .scroll-line {
-      width: 1px;
-      height: 36px;
-      background: linear-gradient(to bottom, var(--gold), transparent);
-      animation: scrollPulse 2s ease-in-out infinite;
-    }
-
-    @keyframes scrollPulse {
-      0%, 100% { opacity: 0.5; transform: scaleY(1); }
-      50% { opacity: 1; transform: scaleY(1.15); }
-    }
 
     /* ─── SECTION BASE ────────────────────────────────── */
     section { scroll-margin-top: 60px; }
@@ -658,7 +626,7 @@
     </header>
 
     <div class="hero">
-      <div class="hero-eyebrow">寿 &nbsp;·&nbsp; Dennis, Ohio</div>
+      <div class="hero-eyebrow">KotoBuki</div>
       <h1>Sushi.<br><em>Sashimi.</em><br>Tradition.</h1>
       <div class="hero-rule"></div>
       <p>Hand-crafted Japanese cuisine prepared with care. Classic flavors, fresh ingredients, served with warmth.</p>
@@ -668,10 +636,7 @@
       </div>
     </div>
 
-    <div class="scroll-hint" aria-hidden="true">
-      <div class="scroll-line"></div>
-      <span>Scroll</span>
-    </div>
+
   </div>
 
   <!-- ── MENUS ── -->
